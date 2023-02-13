@@ -1,0 +1,70 @@
+.header {
+    height: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #bcbcbc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    border-bottom: 1px solid #d9d9d9;
+    margin-top: 1px;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 10px;
+    }
+
+    .toggle-box {
+        cursor: pointer;
+    }
+
+    .userInfo {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .info-header-text {
+            h5 {
+                color: $main_color;
+                font-size: 1.3rem;
+                font-weight: 700;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.9rem;
+                    margin-bottom: 4px;
+                }
+            }
+            p {
+                color: #bcbcbc;
+                font-size: 0.7rem;
+                margin-bottom: 10px;
+            }
+        }
+        .info-header-image {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            cursor: pointer;
+            margin-bottom: 10px;
+            img {
+                border-radius: 50%;
+            }
+        }
+
+        .box-logout {
+            @include center;
+
+            width: 200px;
+            padding: 10px;
+            color: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 0 4px rgba($color: #00000041, $alpha: 0.4);
+
+            button {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+    }
+}
