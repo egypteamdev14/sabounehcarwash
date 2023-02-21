@@ -2,7 +2,7 @@
 import { Inter } from '@next/font/google'
 import { appWithTranslation } from "next-i18next";
 import "../styles/index.scss";
-
+import 'bootstrap/dist/css/bootstrap.css'
 import { ToastContainer } from "react-toastify";
 import MainLayout from '../layout/MainLayout'
 import Head from 'next/head';
@@ -12,6 +12,10 @@ import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux'
 import store from '@/store';
 import AuthGuard from '@/components/AuthGuard';
+
+
+
+
 const inter = Inter({ subsets: ['latin'] })
 
 function App({ Component, pageProps, session }) {

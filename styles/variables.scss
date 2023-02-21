@@ -1,0 +1,18 @@
+$main_color: #05a8f5;
+$dark_color: #00074b;
+
+@mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin circle($width) {
+    width: $width;
+    height: $width;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}

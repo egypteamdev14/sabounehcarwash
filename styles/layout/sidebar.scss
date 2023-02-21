@@ -2,7 +2,7 @@
     width: 17%;
     height: 100vh;
     position: fixed;
-    background-color: $main_color;
+    background-color: $dark_color;
     color: white;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
 
         img {
             @media screen and (max-width: 1200px) {
-                width: 80% !important;
+                width: 100% !important;
             }
             @media screen and (max-width: 768px) {
                 width: 90% !important;

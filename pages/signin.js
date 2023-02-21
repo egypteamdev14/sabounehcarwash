@@ -7,6 +7,7 @@ import Button from "../components/Button"
 import { signIn, useSession } from 'next-auth/react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
 
 
 
@@ -21,11 +22,14 @@ const SignIn = () => {
 
 	const { username, password } = user;
 
+	const [show, setShow] = useState(false)
+
 	const [emailError, setEmailError] = useState('')
 	const [passwordError, setPasswordError] = useState('')
 
 	const { data: session, status } = useSession();
 
+	const showPassword = () => setShow((prev) => !prev)
 
 
 	const router = useRouter()
@@ -37,6 +41,7 @@ const SignIn = () => {
 		setPasswordError('')
 		setUser({ ...user, [name]: value });
 	};
+
 
 	// login in with username and password credentials
 	const login = async (e) => {
@@ -68,12 +73,14 @@ const SignIn = () => {
 
 	return (
 		<div className="sign-in">
-
+			<div className='logo'>
+				<Image src={'/logo.png'} alt="logo" width={170} height={170} />
+			</div>
 			{/* form */}
 			<div className="form">
 				<form onSubmit={login}>
 					<div className="email">
-						<label htmlFor="text">Username</label>
+						<label htmlFor="text" >رقم الهاتف</label>
 						<input
 							type="text"
 							name="username"
@@ -86,20 +93,23 @@ const SignIn = () => {
 						{emailError && <p className="error-message">{emailError}</p>}
 					</div>
 					<div className="password">
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password" >كلمة المرور</label>
 						<input
-							type="password"
+							type={show ? "text" : "password"}
 							name="password"
 							id="password"
 							placeholder="Enter your password"
 							onChange={handelChange}
 							value={password}
 						/>
-
+						<div className='pass-icon' style={{ position: "absolute", top: "60%", right: "10px", cursor: "pointer" }}>
+							<MdOutlineRemoveRedEye fontSize={18} onClick={showPassword} />
+						</div>
 						{passwordError && <p className="error-message">{passwordError}</p>}
 					</div>
 
 					<div className="remember">
+						<p>نسيت كلمة المرور ؟</p>
 						<div>
 							<input
 								type="checkbox"
@@ -108,22 +118,23 @@ const SignIn = () => {
 								value="remember me"
 
 							/>
-							<label htmlFor="remember"> Remember me</label>
+							<label htmlFor="remember"> تذكرنى</label>
 						</div>
-						<p>Forget Password ?</p>
+
 					</div>
 
 					<div className="login-btn">
 						<Button
-							bg={"#138DA4"}
+							bg={"#05A8F5"}
 							color={"#ffffff"}
-							width={"150px"}
+							width={"180px"}
 							height={"45px"}
 							radius={"8px"}
-							fontSize={"1.5rem"}
+							fontSize={"1rem"}
 							fontWeight={"bold"}
+
 						>
-							Login
+							تسجيل الدخول
 						</Button>
 					</div>
 				</form>

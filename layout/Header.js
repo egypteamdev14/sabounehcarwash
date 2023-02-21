@@ -15,7 +15,7 @@ const Header = ({ setToggle }) => {
 	const router = useRouter()
 
 	const { data: session, loading } = useSession();
-	// console.log(session);
+
 
 
 	return (
@@ -25,8 +25,8 @@ const Header = ({ setToggle }) => {
 			</div>
 			<div className='userInfo'>
 				<div className='info-header-text'>
-					<h5>{session ? session?.user?.name : 'Ahmed'}</h5>
-					<p>Admin user</p>
+					<h5>{session ? session?.user.token.user.fullName : 'Ahmed'}</h5>
+					<p>{session ? session?.user.token.user.role : ''}</p>
 				</div>
 				<div className='info-header-image' onClick={() => setLogOut((prev) => !prev)}>
 					<img src={session?.user?.image || '/user.png'} alt='user' width={40} height={40} />

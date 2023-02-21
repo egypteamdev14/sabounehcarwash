@@ -16,11 +16,11 @@ export const authOptions = {
 			async authorize(credentials, req) {
 				// Add logic here to look up the user from the credentials supplied
 				const payload = {
-					username: credentials.username,
+					phoneNumber: credentials.username,
 					password: credentials.password
 				}
 
-				const res = await fetch("https://api.v6.saferoad.net/login/general", {
+				const res = await fetch("http://192.168.0.108:3030/api/users/dashboard/login", {
 					method: "POST",
 					body: JSON.stringify(payload),
 					headers: {

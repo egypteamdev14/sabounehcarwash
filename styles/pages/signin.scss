@@ -1,0 +1,72 @@
+.sign-in {
+    min-height: 100vh;
+    @include center;
+    flex-direction: column;
+
+    .logo {
+        @include center;
+
+        background-color: $dark_color;
+        @include circle(200px);
+    }
+
+    .form {
+        margin-top: 3rem;
+        @include center;
+
+        .email,
+        .password {
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            position: relative;
+
+            label {
+                color: $dark_color;
+                font-weight: 600;
+                margin-bottom: 12px;
+                text-align: right;
+            }
+
+            input {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 20px;
+                border: 1px solid $main_color;
+                border-radius: 6px;
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .error-message {
+                color: red;
+                font-size: 12px;
+            }
+        }
+
+        .remember {
+            @include center;
+            justify-content: space-around;
+            gap: 30px;
+
+            label,
+            p {
+                color: $dark_color;
+                font-weight: 600;
+                text-align: left;
+            }
+        }
+
+        .login-btn {
+            @include center;
+
+            margin-top: 50px;
+
+            button {
+                padding: 5px 8px;
+            }
+        }
+    }
+}
