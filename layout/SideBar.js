@@ -39,15 +39,15 @@ const SideBar = ({ sidebar, toggle, setToggle }) => {
 							onClick={() => setToggle((prev) => !prev)}>
 							<Link href='/'>
 								<span><HiTemplate className='icon' /></span>
-								<span>All Systems</span>
+								<span>Home</span>
 							</Link>
 						</li>
 						<li
-							className={pathname === '/accounts' ? 'active' : ''}
+							className={pathname === '/subscription' ? 'active' : ''}
 							onClick={() => setToggle((prev) => !prev)}>
-							<Link href='/accounts'>
+							<Link href='/subscription'>
 								<span><MdAccountCircle className='icon' /></span>
-								<span>Accounts</span>
+								<span>subscription</span>
 							</Link>
 						</li>
 						<li

@@ -5,7 +5,7 @@ import Router, { useRouter } from "next/router";
 import MainLayout from "../layout/MainLayout";
 import { useDispatch } from "react-redux";
 
-// import { config } from "../config/config"
+
 
 import { getUser } from "@/store/slices/getuser";
 import SignIn from "@/pages/signin";
@@ -16,7 +16,7 @@ import config from "@/config/config";
 const AuthGuard = ({ children }) => {
 	const { data: session, status: loading } = useSession();
 
-	// console.log(session?.user?.token.token)
+	console.log(session?.user?.token.token)
 
 	const hasUser = !!session?.user;
 

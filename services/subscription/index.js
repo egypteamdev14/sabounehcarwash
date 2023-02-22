@@ -1,22 +1,22 @@
 import axios from "axios";
 
 
-// fetch All user (main page)
-export const fetchAllUsers = async () => {
+// fetch All Subscription (main page)
+export const getAllSubscription = async () => {
 	const response = await axios({
 		method: "get",
-		url: `/api/users/dashboard`,
+		url: `/api/subscriptions/`,
 
 	});
 	return response.data;
 };
 
 
-// add new user(add driver)
-export const addUser = async (data) => {
+// add new Subscription
+export const addSubscription = async (data) => {
 	const response = await axios({
 		method: "post",
-		url: "/api/users/dashboard",
+		url: "/api/subscriptions/",
 		data: JSON.stringify(data),
 		headers: {
 			"Content-Type": "application/json",
@@ -25,12 +25,11 @@ export const addUser = async (data) => {
 	return response.data;
 };
 
-// update user
-
-export const updateUser = async (id, data) => {
+// update Subscription by id
+export const updateSubscription = async (id, data) => {
 	const response = await axios({
 		method: "put",
-		url: `/api/users/dashboard/${id}`,
+		url: `/api/subscriptions/${id}`,
 		data: JSON.stringify(data),
 		headers: {
 			"Content-Type": "application/json",
@@ -40,11 +39,11 @@ export const updateUser = async (id, data) => {
 };
 
 
-// delete user 
-export const deleteUser = async (deleteSelected) => {
+// delete Subscription by id
+export const deleteSubscription = async (deleteSelected) => {
 	const response = await axios({
 		method: "delete",
-		url: `/api/users/dashboard/${deleteSelected}`,
+		url: `/api/subscriptions/${deleteSelected}`,
 		headers: {
 			"Content-Type": "application/json",
 		},

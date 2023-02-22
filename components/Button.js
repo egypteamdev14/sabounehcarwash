@@ -13,6 +13,7 @@ const Button = ({
 	fontSize,
 	fontWeight,
 	cl,
+	type,
 	style
 }) => {
 	return (
@@ -31,6 +32,7 @@ const Button = ({
 				fontWeight: fontWeight,
 				...style
 			}}
+			type={type}
 		>
 			{children}
 		</button>

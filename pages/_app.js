@@ -3,6 +3,8 @@ import { Inter } from '@next/font/google'
 import { appWithTranslation } from "next-i18next";
 import "../styles/index.scss";
 import 'bootstrap/dist/css/bootstrap.css'
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from "react-toastify";
 import MainLayout from '../layout/MainLayout'
 import Head from 'next/head';
@@ -13,8 +15,14 @@ import { Provider } from 'react-redux'
 import store from '@/store';
 import AuthGuard from '@/components/AuthGuard';
 
+import {
+
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
 
 
+const queryClient = new QueryClient()
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -45,9 +53,12 @@ function App({ Component, pageProps, session }) {
         </SessionProvider> :
         <SessionProvider session={pageProps.session}>
           <Provider store={store}>
+
             <AuthGuard>
               {/* <MainLayout> */}
-              <Component {...pageProps} />
+              <QueryClientProvider client={queryClient}>
+                <Component {...pageProps} />
+              </QueryClientProvider>
               {/* </MainLayout> */}
             </AuthGuard>
           </Provider>
