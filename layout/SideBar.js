@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
+import { sideBarLinks } from '@/helper/sideBarLinks';
 
 const SideBar = ({ sidebar, toggle, setToggle }) => {
 
@@ -18,9 +19,6 @@ const SideBar = ({ sidebar, toggle, setToggle }) => {
 	const router = useRouter();
 
 
-
-
-	// console.log(`${window.location.origin}/signin`);
 
 	return (
 		<>
@@ -34,38 +32,17 @@ const SideBar = ({ sidebar, toggle, setToggle }) => {
 				</div>
 				<div className='menu-items'>
 					<ul>
-						<li
-							className={pathname === '/' ? 'active' : ''}
-							onClick={() => setToggle((prev) => !prev)}>
-							<Link href='/'>
-								<span><HiTemplate className='icon' /></span>
-								<span>Home</span>
-							</Link>
-						</li>
-						<li
-							className={pathname === '/subscription' ? 'active' : ''}
-							onClick={() => setToggle((prev) => !prev)}>
-							<Link href='/subscription'>
-								<span><MdAccountCircle className='icon' /></span>
-								<span>subscription</span>
-							</Link>
-						</li>
-						<li
-							className={pathname === '/users' ? 'active' : ''}
-							onClick={() => setToggle((prev) => !prev)}>
-							<Link href='users'>
-								<span><FiUsers className='icon' /></span>
-								<span>Users</span>
-							</Link>
-						</li>
-						<li
-							className={pathname === '/payments' ? 'active' : ''}
-							onClick={() => setToggle((prev) => !prev)}>
-							<Link href='/payments'>
-								<span><MdPayment className='icon' /></span>
-								<span>Payments</span>
-							</Link>
-						</li>
+						{sideBarLinks.map((link, index) => (
+							<li
+								key={index}
+								className={pathname === link.path ? 'active' : ''}
+								onClick={() => setToggle((prev) => !prev)}>
+								<Link href={link.path}>
+									<span>{link.icon}</span>
+									<span>{link.title}</span>
+								</Link>
+							</li>
+						))}
 					</ul>
 				</div>
 				<div className='logout'>

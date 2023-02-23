@@ -12,6 +12,7 @@ const UpdatePopUp = ({ id }) => {
 		status: ''
 	});
 
+	// handel input change
 	const handelChange = (e) => {
 		const { value, name } = e.target
 		setFormData({ ...formData, [name]: value })
@@ -19,12 +20,7 @@ const UpdatePopUp = ({ id }) => {
 
 	const { status } = formData
 
-	// console.log(formData)
-
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-
-
+	// handle Update
 	const handelUpdate = async (e) => {
 		e.preventDefault();
 		try {
@@ -32,14 +28,15 @@ const UpdatePopUp = ({ id }) => {
 
 			toast.success("User updated successfully")
 			setShow(false)
-
-
-
 		} catch (error) {
 			toast.error(error.message)
 			console.log(error.message);
 		}
 	}
+
+	// handel Show and Hide Modal
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 	return (
 		<>

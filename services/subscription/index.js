@@ -6,7 +6,6 @@ export const getAllSubscription = async () => {
 	const response = await axios({
 		method: "get",
 		url: `/api/subscriptions/`,
-
 	});
 	return response.data;
 };
@@ -17,9 +16,9 @@ export const addSubscription = async (data) => {
 	const response = await axios({
 		method: "post",
 		url: "/api/subscriptions/",
-		data: JSON.stringify(data),
+		data: data,
 		headers: {
-			"Content-Type": "application/json",
+			"Content-Type": "multipart/form-data",
 		},
 	});
 	return response.data;

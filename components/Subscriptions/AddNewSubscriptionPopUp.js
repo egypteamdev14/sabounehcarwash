@@ -6,9 +6,52 @@ import Modal from 'react-bootstrap/Modal';
 import Button from '../Button';
 import { addUser, updateUser } from '@/services/users';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import { addSubscription } from '@/services/subscription';
 
 const AddNewSubscriptionPopUp = () => {
 	const [show, setShow] = useState(false);
+	const [image, setImage] = useState('');
+	const [formData, setFormData] = useState({
+		title: '',
+		description: '',
+		price: ''
+	});
+
+	const { title, description, price } = formData;
+
+	// handel Input Change
+	const handelChange = (e) => {
+		const { name, value } = e.target;
+		setFormData({ ...formData, [name]: value })
+	}
+	// handel File Change
+	const handelImageChange = (e) => {
+		setImage(e.target.files[0])
+	}
+
+	// Add New Subscription
+	const handelSubmit = async (e) => {
+		e.preventDefault();
+		// append image
+		const imageData = new FormData();
+		imageData.append('image', image)
+		imageData.append('title', title)
+		imageData.append('description', description)
+		imageData.append('price', price)
+
+		try {
+			await addSubscription(imageData);
+
+			toast.success("Subscription added successfully")
+			setShow(false)
+
+		} catch (error) {
+			toast.error(error.message)
+			console.log(error.message)
+		}
+	}
+
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -32,21 +75,25 @@ const AddNewSubscriptionPopUp = () => {
 					<Modal.Title>Add New Subscription</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form>
+					<Form onSubmit={handelSubmit}>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Title</Form.Label>
-							<Form.Control type="text" placeholder="Enter Title" required />
+							<Form.Control type="text" placeholder="Enter Title" required name='title' onChange={(e) => handelChange(e)} />
 							<Form.Text className="text-muted">
 								Well never share your email with anyone else.
 							</Form.Text>
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicDescription">
 							<Form.Label>Description</Form.Label>
-							<Form.Control type="text" placeholder="Description" />
+							<Form.Control type="text" placeholder="Description" required name='description' onChange={(e) => handelChange(e)} />
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicPrice">
 							<Form.Label>Price</Form.Label>
-							<Form.Control type="number" placeholder="Price" />
+							<Form.Control type="number" placeholder="Price" required name='price' onChange={(e) => handelChange(e)} />
+						</Form.Group>
+						<Form.Group className="mb-3" controlId='formBasicImage'>
+							<Form.Label>Chose Image</Form.Label>
+							<Form.Control type='file' placeholder='Chose Image' required onChange={(e) => handelImageChange(e)} />
 						</Form.Group>
 
 						<div className='d-flex align-items-center justify-content-center'>

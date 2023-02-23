@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import Button from '@/components/Button';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+
 import { AiOutlineMenu } from 'react-icons/ai';
 import { CgLogOut } from 'react-icons/cg';
 import { MdKeyboardArrowDown } from 'react-icons/md'
@@ -34,17 +35,18 @@ const Header = ({ setToggle }) => {
 				</div>
 				{
 					logOut && (
-						<div className='box-logout logout absolute bottom-[-45px] md:bottom-[-45px] right-8 ' style={{ width: "120px", backgroundColor: "#0C162B" }}>
+						<div className='box-logout logout absolute bottom-[-45px] md:bottom-[-65px] right-8 ' style={{ width: "140px", backgroundColor: "#0C162B" }}>
 							<Button
-								width={"220px"}
+								width={"120px"}
 								height={"45px"}
 								border={"none"}
 								bg={"#189FBE14"}
 								color={"#fff"}
 								radius={"8px"}
-								fontSize={"16px"}
+								fontSize={"14px"}
 								fontWeight={"bold"}
 								cursor={"pointer"}
+								cl="px-3"
 								onClick={() => {
 									signOut({ redirect: false, callbackUrl: `${window.location.origin}/signin` })
 									router.push("/signin");

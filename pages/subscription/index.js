@@ -5,15 +5,16 @@ import { Table } from 'react-bootstrap'
 import { deleteSubscription, getAllSubscription } from "@/services/subscription"
 import { useQuery } from 'react-query';
 import Button from '@/components/Button';
-import UpdatePopUp from '@/components/updatePopUp';
+
 import { toast } from 'react-toastify';
 import AddNewSubscriptionPopUp from '@/components/Subscriptions/AddNewSubscriptionPopUp';
+import UpdateNewSubscriptions from '@/components/Subscriptions/UpdateNewSubscriptions';
 
 const Subscription = () => {
 
 	const { data, error, isLoading } = useQuery("getSubscription", getAllSubscription);
 
-	console.log(data)
+	// console.log(data)
 
 	const handleDelete = async (id) => {
 		try {
@@ -32,7 +33,7 @@ const Subscription = () => {
 		<section className='users'>
 			<div className='d-flex justify-content-between align-items-center m-3' >
 
-				<h2>Show subscriptions </h2>
+				<h2>Show Subscriptions </h2>
 				<AddNewSubscriptionPopUp />
 
 
@@ -72,7 +73,7 @@ const Subscription = () => {
 									onClick={() => handleDelete(user._id)}
 								>Delete</Button> </td>
 							<td>
-								<UpdatePopUp id={user._id} />
+								<UpdateNewSubscriptions id={user._id} />
 							</td>
 						</tr>
 
@@ -117,7 +118,7 @@ const Subscription = () => {
 									onClick={() => handleDelete(user._id)}
 								>Delete</Button> </td>
 							<td>
-								<UpdatePopUp id={user._id} />
+								<UpdateNewSubscriptions id={user._id} />
 							</td>
 						</tr>
 
