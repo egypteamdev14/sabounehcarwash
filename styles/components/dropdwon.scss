@@ -1,0 +1,18 @@
+.drop{
+.drop-down {
+
+
+	background-color: "transparent" !important;
+	border: "none";
+	display: "flex";
+	gap: "22px"
+
+}
+.dropdown-menu {
+	.dropdown-item {
+		&:hover{
+			background-color: transparent !important;
+		}
+	}
+}
+}

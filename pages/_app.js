@@ -71,21 +71,21 @@ function App({ Component, pageProps, session }) {
 export default appWithTranslation(App);
 
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
 
-  const session = await getSession({ req: context.req });
+//   const session = await getSession({ req: context.req });
 
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/signin',
-        permanent: false
-      }
-    }
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/signin',
+//         permanent: false
+//       }
+//     }
+//   }
 
-  return {
-    props: { session }, // will be passed to the page component as props
-  }
-}
+//   return {
+//     props: { session }, // will be passed to the page component as props
+//   }
+// }

@@ -8,8 +8,6 @@ const MainLayout = ({ children }) => {
 
 	const [toggle, setToggle] = useState(false)
 
-
-
 	return (
 		<>
 			<div className='grid grid-cols-6'>

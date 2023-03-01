@@ -1,20 +1,25 @@
+import React from 'react'
 import Button from '@/components/Button'
-import React, { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import { AUTH_TOKEN, deleteUser, fetchAllUsers } from '@/services/users'
-import axios from 'axios'
-import { useSession } from 'next-auth/react'
 import AddUserPopUp from '@/components/Users/AddUserPopUp'
-import { toast } from 'react-toastify'
-import { useQuery } from 'react-query'
 import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
+import { deleteUser, fetchAllUsers } from '@/services/users'
+import { useSession } from 'next-auth/react'
+import { Table } from 'react-bootstrap'
+import { useQuery } from 'react-query'
+import { toast } from 'react-toastify'
+import AddEmployee from '@/components/Users/AddEmployee'
 
-const Users = () => {
+const Employee = () => {
 
 	const { data: session, status } = useSession();
 
+
 	const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
+
+	const employee = data?.users.filter((user)=> user.role === 'employee');
+
+	console.log(employee)
+
 	// console.log(data?.users)
 
 	const handleDelete = async (id) => {
@@ -31,14 +36,13 @@ const Users = () => {
 	}
 
 
-	// console.log(users.users);
-
 	return (
-		<section className='users'>
+		<section className='employee'>
+
 			<div className='d-flex justify-content-between align-items-center m-3' >
 
-				<h2>Show All Users </h2>
-				<AddUserPopUp />
+				<h2>Employee List </h2>
+				<AddEmployee/>
 
 
 			</div>
@@ -49,22 +53,27 @@ const Users = () => {
 						<th>#ID</th>
 						<th>Full Name</th>
 						<th>Phone Number</th>
-						<th style={{ width: "20%" }}>Role</th>
-						<th >Status</th>
+						<th style={{ width: "20%" }}>Creation of account date</th>
+						<th >last login date</th>
+						<th >employee state</th>
+						<th >Privilege</th>
 						<th>Delete</th>
 						<th>Update</th>
 					</tr>
 				</thead>
 				<tbody>
 					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-					{data?.users.map((user) => (
+					{employee?.map((user) => (
 
 						<tr key={user._id}>
 							<td>{user._id.slice(0, 8)}</td>
 							<td>{user.fullName}</td>
 							<td>{user.phoneNumber}</td>
-							<td >{user.role}</td>
+							<td >{user.createdAt}</td>
+							<td >{user.lastLogin}</td>
 							<td >{user.status}</td>
+							<td >{user.permissions}</td>
+							
 							<td>
 								<Button
 									bg={"#05A8F5"}
@@ -84,7 +93,7 @@ const Users = () => {
 				</tbody>
 			</Table>
 		</section>
-	);
+	)
 }
 
-export default Users
+export default Employee

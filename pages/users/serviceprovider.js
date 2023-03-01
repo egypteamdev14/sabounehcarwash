@@ -1,20 +1,26 @@
 import Button from '@/components/Button'
-import React, { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import { AUTH_TOKEN, deleteUser, fetchAllUsers } from '@/services/users'
-import axios from 'axios'
-import { useSession } from 'next-auth/react'
 import AddUserPopUp from '@/components/Users/AddUserPopUp'
-import { toast } from 'react-toastify'
-import { useQuery } from 'react-query'
+import AddWasher from '@/components/Users/AddWasher'
 import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
+import UpdateWasher from '@/components/Users/UpdateWasher'
+import { deleteUser, fetchAllUsers } from '@/services/users'
+import { useSession } from 'next-auth/react'
+import React from 'react'
+import {  Table } from 'react-bootstrap'
+import { useQuery } from 'react-query'
 
-const Users = () => {
+const ServiceProvider = () => {
+
 
 	const { data: session, status } = useSession();
 
+
 	const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
+
+	const serviceProvider = data?.users.filter((user) => user.role === 'serviceProvider');
+
+	console.log(serviceProvider)
+
 	// console.log(data?.users)
 
 	const handleDelete = async (id) => {
@@ -30,15 +36,12 @@ const Users = () => {
 		}
 	}
 
-
-	// console.log(users.users);
-
 	return (
-		<section className='users'>
+		<section className='service-provider'>
 			<div className='d-flex justify-content-between align-items-center m-3' >
 
-				<h2>Show All Users </h2>
-				<AddUserPopUp />
+				<h2>Washer List </h2>
+				<AddWasher />
 
 
 			</div>
@@ -49,22 +52,25 @@ const Users = () => {
 						<th>#ID</th>
 						<th>Full Name</th>
 						<th>Phone Number</th>
-						<th style={{ width: "20%" }}>Role</th>
-						<th >Status</th>
+						<th style={{ width: "20%" }}>Creation of account date</th>
+						<th >last login date</th>
+						<th >employee state</th>
 						<th>Delete</th>
 						<th>Update</th>
 					</tr>
 				</thead>
 				<tbody>
 					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-					{data?.users.map((user) => (
+					{serviceProvider?.map((user) => (
 
 						<tr key={user._id}>
 							<td>{user._id.slice(0, 8)}</td>
 							<td>{user.fullName}</td>
 							<td>{user.phoneNumber}</td>
-							<td >{user.role}</td>
+							<td >{user.createdAt}</td>
+							<td >{user.lastLogin}</td>
 							<td >{user.status}</td>
+
 							<td>
 								<Button
 									bg={"#05A8F5"}
@@ -76,7 +82,7 @@ const Users = () => {
 									onClick={() => handleDelete(user._id)}
 								>Delete</Button> </td>
 							<td>
-								<UpdateUserPopUp id={user._id} />
+								<UpdateWasher id={user._id} />
 							</td>
 						</tr>
 					))}
@@ -84,7 +90,7 @@ const Users = () => {
 				</tbody>
 			</Table>
 		</section>
-	);
+	)
 }
 
-export default Users
+export default ServiceProvider

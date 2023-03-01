@@ -21,7 +21,7 @@ const Header = ({ setToggle }) => {
 
 	return (
 		<div className='header relative'>
-			<div className='toggle-box' onClick={() => setToggle((prev) => !prev)}>
+			<div role="button" tabIndex="0" className='toggle-box' onClick={() => setToggle((prev) => !prev)}>
 				<AiOutlineMenu color={'#000'} />
 			</div>
 			<div className='userInfo'>

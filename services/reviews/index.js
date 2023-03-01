@@ -1,19 +1,18 @@
 import axios from "axios";
 
-
 // Get All Reviews
 export const getAllReviews = async () => {
 	const response = await axios({
 		method: "get",
 		url: `/api/reviews/`,
-
 	});
 	return response.data;
 };
 
 
 // Update Review
-export const updateReviews = async (id, data) => {
+export const updateReviews = async (id, data) => { 
+
 	const response = await axios({
 		method: "put",
 		url: `/api/reviews/${id}`,
@@ -35,5 +34,6 @@ export const deleteReview = async (id) => {
 			"Content-Type": "application/json",
 		},
 	});
+
 	return response.data;
 };

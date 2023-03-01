@@ -4,16 +4,16 @@ import { HiTemplate } from "react-icons/hi";
 import { MdAccountCircle, MdOutlineReviews } from "react-icons/md";
 
 export const sideBarLinks = [
-	{
-		title: "Home",
-		path: "/",
-		icon: <HiTemplate className='icon' />
-	},
-	{
-		title: "Users",
-		path: "/users",
-		icon: <FiUsers className='icon' />
-	},
+	// {
+	// 	title: "Home",
+	// 	path: "/",
+	// 	icon: <HiTemplate className='icon' />
+	// },
+	// {
+	// 	title: "Users",
+	// 	path: "/users",
+	// 	icon: <FiUsers className='icon' />
+	// },
 	{
 		title: "Reviews",
 		path: "/reviews",

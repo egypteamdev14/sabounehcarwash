@@ -33,8 +33,6 @@ const UpdateUserPopUp = ({ id }) => {
 			toast.success("User updated successfully")
 			setShow(false)
 
-
-
 		} catch (error) {
 			toast.error(error.message)
 			console.log(error.message);
