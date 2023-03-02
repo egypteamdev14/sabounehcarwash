@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 import Modal from 'react-bootstrap/Modal';
-import Button from '../Button';
+import Button from '../../Button';
 import { addUser, updateUser } from '@/services/users';
 import { toast } from 'react-toastify';
 
-function AddUserPopUp({ updateUserInfo }) {
+function AddEmployee({ updateUserInfo }) {
 	const [show, setShow] = useState(false);
 
 	const [formData, setFormData] = useState({
-		phoneNumber: updateUserInfo ? updateUserInfo.phoneNumber : "",
-		role: updateUserInfo ? updateUserInfo.role : "",
 		fullName: updateUserInfo ? updateUserInfo.fullName : "",
-		password: updateUserInfo ? updateUserInfo.password : ""
+		phoneNumber: updateUserInfo ? updateUserInfo.phoneNumber : "",
+		password: updateUserInfo ? updateUserInfo.password : "",
+		role: "employee"
 	});
 
-	const { phoneNumber, role, fullName, password } = formData
+	const { phoneNumber, fullName, password } = formData
 
 	// console.log(updateUserInfo)
 
@@ -32,7 +32,6 @@ function AddUserPopUp({ updateUserInfo }) {
 	// handel Add User
 	const handelAdd = async (e) => {
 		e.preventDefault();
-		
 
 		try {
 			await addUser(formData);
@@ -53,16 +52,16 @@ function AddUserPopUp({ updateUserInfo }) {
 			<Button
 				bg={"#05A8F5"}
 				color={"#ffffff"}
-				width={"130px"}
+				width={"170px"}
 				height={"35px"}
 				radius={"8px"}
 				fontSize={"1rem"}
 				onClick={handleShow}
-			>Add New User </Button>
+			>Add New Employee </Button>
 
 			<Modal centered show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Add New User</Modal.Title>
+					<Modal.Title>Add New Employee</Modal.Title>
 				</Modal.Header>
 				<Modal.Body className=''>
 					<Form onSubmit={handelAdd}>
@@ -71,23 +70,18 @@ function AddUserPopUp({ updateUserInfo }) {
 							<Form.Control type="text" placeholder="Enter FullName" name='fullName' required onChange={(e) => handelChange(e)} value={fullName} />
 							<Form.Text className="text-muted">
 
-								We will never share your email with anyone else.
+								We will never share your Info.
 							</Form.Text>
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Mobile Number</Form.Label>
 							<Form.Control type="text" placeholder="Enter Mobile Number" name='phoneNumber' required onChange={(e) => handelChange(e)} value={phoneNumber} />
 							<Form.Text className="text-muted">
-								we will never shere your info
+								we will never share your info
 							</Form.Text>
 						</Form.Group>
 
-						<Form.Select className="mb-3" aria-label="Default select example" name='role' required onChange={(e) => handelChange(e)} value={role}>
-							<option>Select Your Role</option>
-							<option value="admin">admin</option>
-							<option value="employee">employee</option>
-
-						</Form.Select>
+						
 
 						<Form.Group className="mb-3" controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
@@ -126,4 +120,4 @@ function AddUserPopUp({ updateUserInfo }) {
 	);
 }
 
-export default AddUserPopUp;
+export default AddEmployee;

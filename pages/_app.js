@@ -5,6 +5,10 @@ import "../styles/index.scss";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify/dist/ReactToastify.min.css';
+
+
+import 'ag-grid-community/styles//ag-grid.css';
+import 'ag-grid-community/styles//ag-theme-alpine.css';
 import { ToastContainer } from "react-toastify";
 import MainLayout from '../layout/MainLayout'
 import Head from 'next/head';

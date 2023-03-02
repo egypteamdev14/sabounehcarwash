@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 import Modal from 'react-bootstrap/Modal';
-import Button from '../Button';
+import Button from '../../Button';
 import { addNewWasher, addUser, updateUser } from '@/services/users';
 import { toast } from 'react-toastify';
 
-function UpdateWasher({ updateUserInfo }) {
+function AddWasher({ updateUserInfo }) {
 	const [show, setShow] = useState(false);
   const [imageFile, setImageFile] = useState('');
 	const [formData, setFormData] = useState({
@@ -66,7 +66,7 @@ function UpdateWasher({ updateUserInfo }) {
 
 	}
 
-
+	
 
 
 	return (
@@ -80,15 +80,14 @@ function UpdateWasher({ updateUserInfo }) {
 				radius={"8px"}
 				fontSize={"1rem"}
 				onClick={handleShow}
-			>Update Washer </Button>
+			>Add New Washer </Button>
 
 			<Modal centered show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Update Washer</Modal.Title>
+					<Modal.Title>Add New Washer</Modal.Title>
 				</Modal.Header>
 				<Modal.Body className=''>
 					<Form onSubmit={handelAdd}>
-						{/* Full Name */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Full Name</Form.Label>
 							<Form.Control type="text" placeholder="Enter FullName" name='fullName' required onChange={(e) => handelChange(e)} value={fullName} />
@@ -97,13 +96,11 @@ function UpdateWasher({ updateUserInfo }) {
 								We will never share your Info.
 							</Form.Text>
 						</Form.Group>
-						{/* Choose IMAge */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Chose Image</Form.Label>
 							<Form.Control type="file" 	placeholder="chose Image" name='imageFile' required onChange={handelFileChange}  />
 							
 						</Form.Group>
-						{/* Id Number */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>ID Number</Form.Label>
 							<Form.Control type="text" placeholder="Enter id Number" name='IDNumber' required onChange={(e) => handelChange(e)} value={IDNumber} />
@@ -112,7 +109,6 @@ function UpdateWasher({ updateUserInfo }) {
 								We will never share your Info.
 							</Form.Text>
 						</Form.Group>
-						{/* Address */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Address</Form.Label>
 							<Form.Control type="text" placeholder="Enter FullName" name='address' required onChange={(e) => handelChange(e)} value={address} />
@@ -121,31 +117,22 @@ function UpdateWasher({ updateUserInfo }) {
 								We will never share your Info.
 							</Form.Text>
 						</Form.Group>
-						{/* Mobile Number */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Mobile Number</Form.Label>
 							<Form.Control type="text" placeholder="Enter Mobile Number" name='phoneNumber' required onChange={(e) => handelChange(e)} value={phoneNumber} />
 							
 						</Form.Group>
-						{/* Other MObile Number */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Other Mobile Number</Form.Label>
 							<Form.Control type="text" placeholder="Enter Mobile Number" name='RelativePhone' required onChange={(e) => handelChange(e)} value={RelativePhone} />
 							
 						</Form.Group>
-             {/* Vehicle Type */}
+ 
+
 						<Form.Select className="mb-3" aria-label="Default select example" name='vehicleType' required onChange={(e) => handelChange(e)} >
 							<option>Vehicle Type</option>
 							<option value="car">Car</option>
 							<option value="motorcycle">Motorcycle</option>
-
-						</Form.Select>
-						{/* Type of Subscription */}
-						<Form.Select className="mb-3" aria-label="Default select example" name='TypeofSubscription' required onChange={(e) => handelChange(e)} >
-							<option>Type of Subscription</option>
-							<option value="Full-Car Wash">Full-Car Wash</option>
-							<option value="plus">plus</option>
-							<option value="Lite">Lite</option>
 
 						</Form.Select>
 
@@ -181,4 +168,4 @@ function UpdateWasher({ updateUserInfo }) {
 	);
 }
 
-export default UpdateWasher;
+export default AddWasher;

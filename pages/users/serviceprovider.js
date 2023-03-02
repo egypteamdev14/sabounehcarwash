@@ -1,17 +1,20 @@
 import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/AddUserPopUp'
-import AddWasher from '@/components/Users/AddWasher'
+import AddUserPopUp from '@/components/Users/Employee/AddUserPopUp'
+import AddWasher from '@/components/Users/Washer/AddWasher'
 import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
-import UpdateWasher from '@/components/Users/UpdateWasher'
+import UpdateWasher from '@/components/Users/Washer/UpdateWasher'
 import { deleteUser, fetchAllUsers } from '@/services/users'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useState } from 'react'
 import {  Table } from 'react-bootstrap'
 import { useQuery } from 'react-query'
+import AgGridDT from '@/components/AgGridDT'
 
 const ServiceProvider = () => {
+  
+  const [gridApi, setGridApi] = useState(null)
 
-
+  
 	const { data: session, status } = useSession();
 
 
@@ -21,8 +24,75 @@ const ServiceProvider = () => {
 
 	console.log(serviceProvider)
 
-	// console.log(data?.users)
-
+	// columns definition
+	const columnDefs =
+		[
+    
+			{ headerName: "ID", field: "_id", maxWidth: 150 },
+			{ headerName: "Full Name", field: "fullName", maxWidth: 150 },
+			{ headerName: "Phone Number", field: "phoneNumber", maxWidth: 150},
+			
+			{ headerName: "Creation of account date", field: "createdAt" , maxWidth: 300},
+			{ headerName: "Last login date", field: "lastLogin" },
+			{ headerName: "Employee state", field: "status", maxWidth: 170 },
+			{ headerName: "Privilege", field: "permissions" },
+			{
+				headerName: "Actions",
+				field: "id",
+				minWidth: 400,
+				sortable: false,
+				filter: false,
+				floatingFilter: false , cellRendererFramework: (params) => <div>
+					<UpdateWasher  />
+					<Button
+										style={{marginLeft : "20px"}}
+										bg={"#05A8F5"}
+										color={"#ffffff"}
+										width={"130px"}
+										height={"35px"}
+										radius={"8px"}
+										fontSize={"1rem"}
+										onClick={() => handleDelete(params?.data?._id
+											)}
+									>Delete</Button>
+				</div>
+			}
+		]
+	
+  
+	const defaultColDef = {
+			sortable: true,
+			flex: 1,
+			filter: true,
+			floatingFilter: true
+	}
+	
+  //  init 
+	const onGridReady = (params) => {
+    setGridApi(params)
+  }
+  
+	// Export Excel 
+	const onBtExport = () => {
+    gridApi?.api.exportDataAsCsv();
+  }
+   
+  // Row Style
+	const getRowStyle = (params) => {
+    if (params.data._id % 2) {
+      return {
+        backgroundColor: "#FFE7D9",
+        color: "#7A0C2E",
+      };
+    } else {
+      return {
+        backgroundColor: "#DFDFDF",
+        color: "#001C29",
+      };
+    }
+  }
+  
+	// delete user
 	const handleDelete = async (id) => {
 		try {
 			await deleteUser(id);
@@ -46,7 +116,7 @@ const ServiceProvider = () => {
 
 			</div>
 
-			<Table striped bordered hover>
+			{/* <Table striped bordered hover>
 				<thead>
 					<tr>
 						<th>#ID</th>
@@ -88,7 +158,16 @@ const ServiceProvider = () => {
 					))}
 
 				</tbody>
-			</Table>
+			</Table> */}
+
+			<AgGridDT
+			 
+			 columnDefs={columnDefs}
+			 rowData={serviceProvider}
+			 defaultColDef={defaultColDef}  
+			 onGridReady={onGridReady}
+			 getRowStyle={getRowStyle}
+			/>
 		</section>
 	)
 }

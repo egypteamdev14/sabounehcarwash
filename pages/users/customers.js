@@ -1,14 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/AddUserPopUp'
+import AddUserPopUp from '@/components/Users/Employee/AddUserPopUp'
 import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
 import { deleteUser, fetchAllUsers } from '@/services/users'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { Table } from 'react-bootstrap'
-import { useQuery } from 'react-query'
+import { useQuery } from 'react-query';
+
+import {AgGridReact} from 'ag-grid-react';
+import AgGridDT from '@/components/AgGridDT'
+import { toast } from 'react-toastify'
+
 
 const Customers = () => {
-
+  const [gridApi, setGridApi] = useState(null)
 	const { data: session, status } = useSession();
 
 
@@ -19,7 +25,76 @@ const Customers = () => {
 	console.log(users)
 
 	// console.log(data?.users)
-
+  
+	// columns definition
+	const columnDefs =
+		[
+    
+			{ headerName: "ID", field: "_id", maxWidth: 150 },
+			{ headerName: "Full Name", field: "fullName", maxWidth: 150 },
+			{ headerName: "Phone Number", field: "phoneNumber", maxWidth: 150},
+			
+			{ headerName: "Creation of account date", field: "createdAt" , maxWidth: 300},
+			{ headerName: "Last login date", field: "lastLogin" },
+			{ headerName: "Employee state", field: "status", maxWidth: 170 },
+			{ headerName: "Privilege", field: "permissions" },
+			{
+				headerName: "Actions",
+				field: "id",
+				minWidth: 400,
+				sortable: false,
+				filter: false,
+				floatingFilter: false , cellRendererFramework: (params) => <div>
+					<UpdateUserPopUp  />
+					<Button
+										style={{marginLeft : "20px"}}
+										bg={"#05A8F5"}
+										color={"#ffffff"}
+										width={"130px"}
+										height={"35px"}
+										radius={"8px"}
+										fontSize={"1rem"}
+										onClick={() => handleDelete(params?.data?._id
+											)}
+									>Delete</Button>
+				</div>
+			}
+		]
+	
+  
+	const defaultColDef = {
+			sortable: true,
+			flex: 1,
+			filter: true,
+			floatingFilter: true
+	}
+	
+  //  init 
+	const onGridReady = (params) => {
+    setGridApi(params)
+  }
+  
+	// Export Excel 
+	const onBtExport = () => {
+    gridApi?.api.exportDataAsCsv();
+  }
+   
+  // Row Style
+	const getRowStyle = (params) => {
+    if (params.data._id % 2) {
+      return {
+        backgroundColor: "#FFE7D9",
+        color: "#7A0C2E",
+      };
+    } else {
+      return {
+        backgroundColor: "#DFDFDF",
+        color: "#001C29",
+      };
+    }
+  }
+  
+	// delete user
 	const handleDelete = async (id) => {
 		try {
 			await deleteUser(id);
@@ -33,18 +108,32 @@ const Customers = () => {
 		}
 	}
 
+	
+
 	return (
 		<section className='customers'>
 
 			<div className='d-flex justify-content-between align-items-center m-3' >
 
-				<h2>User List </h2>
+				<h2>Customer List </h2>
 				<AddUserPopUp />
 
 
 			</div>
-
-			<Table striped bordered hover>
+      
+			<Button
+			 onClick={onBtExport}
+			 bg={"#05A8F5"}
+			 color={"#ffffff"}
+			 width={"130px"}
+			 height={"35px"}
+			 radius={"8px"}
+			 fontSize={"1rem"}
+			 cl={"mt-2 mb-3"}
+			 >
+			 Export to Excel
+			</Button>
+			{/* <Table striped bordered hover>
 				<thead>
 					<tr>
 						<th>#ID</th>
@@ -86,7 +175,16 @@ const Customers = () => {
 					))}
 
 				</tbody>
-			</Table>
+			</Table> */}
+
+			<AgGridDT 
+			 
+			 columnDefs={columnDefs}
+			 rowData={users}
+			 defaultColDef={defaultColDef}  
+			 onGridReady={onGridReady}
+			 getRowStyle={getRowStyle}
+			/>
 		</section>
 	)
 }
