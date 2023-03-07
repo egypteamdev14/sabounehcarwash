@@ -12,10 +12,12 @@ const UpdateNewSubscriptions = ({ id }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		description: '',
-		price: 0
+		price: 0,
+		washerFees: 0,
+		washerFeesUnderEvaluation: 0
 	});
 
-	const { title, description, price } = formData
+	const { title, description, price, washerFees, washerFeesUnderEvaluation } = formData
 	// handel Input Change
 	const handelChange = (e) => {
 		const { name, value } = e.target;
@@ -73,6 +75,14 @@ const UpdateNewSubscriptions = ({ id }) => {
 						<Form.Group className="mb-3" controlId="formBasicPrice">
 							<Form.Label>Price</Form.Label>
 							<Form.Control type="number" placeholder="Price" required name='price' onChange={(e) => handelChange(e)} />
+						</Form.Group>
+						<Form.Group className="mb-3" controlId="formBasicPrice">
+							<Form.Label>Washer Fees</Form.Label>
+							<Form.Control type="number" placeholder="Washer Fees" required name='WasherFees' onChange={(e) => handelChange(e)} value={washerFees}/>
+						</Form.Group>
+						<Form.Group className="mb-3" controlId="formBasicPrice">
+							<Form.Label>Washer Fees Under Evaluation</Form.Label>
+							<Form.Control type="number" placeholder="Washer Fees Under Evaluation" required name='washerFeesUnderEvaluation' onChange={(e) => handelChange(e)} value={washerFeesUnderEvaluation}/>
 						</Form.Group>
 
 

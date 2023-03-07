@@ -9,17 +9,13 @@ import Button from '@/components/Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession, signIn, signOut } from 'next-auth/react';
-// import Button from '@mui/material/Button';
-// import Menu from '@mui/material/Menu';
-// import MenuItem from '@mui/material/MenuItem';
-// import Fade from '@mui/material/Fade';
+
 import { sideBarLinks } from '@/helper/sideBarLinks';
 import DropDown from '@/components/DropDown';
 
 const SideBar = ({ sidebar, toggle, setToggle }) => {
 
-	// const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
+	
 
 	const { locale, pathname, query, asPath, locales, push } = useRouter();
   

@@ -25,7 +25,7 @@ export const addUser = async (data) => {
 	return response.data;
 };
 
-// add new user(add driver)
+// add new Washer(add driver)
 export const addNewWasher = async (data) => {
 	const response = await axios({
 		method: "post",
@@ -37,6 +37,21 @@ export const addNewWasher = async (data) => {
 	});
 	return response.data;
 };
+
+// update Washer
+
+export const updateWasher = async (id, data) => {
+	const response = await axios({
+		method: "put",
+		url: `/api/users/dashboard/${id}`,
+		data: data,
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	});
+	return response.data;
+};
+
 
 // update user
 

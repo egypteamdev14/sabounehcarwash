@@ -2,6 +2,7 @@ import { AiFillCar } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { HiTemplate } from "react-icons/hi";
 import { MdAccountCircle, MdOutlineReviews } from "react-icons/md";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export const sideBarLinks = [
 	// {
@@ -9,11 +10,11 @@ export const sideBarLinks = [
 	// 	path: "/",
 	// 	icon: <HiTemplate className='icon' />
 	// },
-	// {
-	// 	title: "Users",
-	// 	path: "/users",
-	// 	icon: <FiUsers className='icon' />
-	// },
+	{
+		title: "Orders",
+		path: "/orders",
+		icon: <AiOutlineShoppingCart className='icon' />
+	},
 	{
 		title: "Reviews",
 		path: "/reviews",

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/Employee/AddUserPopUp'
+import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
 import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
 import { deleteUser, fetchAllUsers } from '@/services/users'
 import { useSession } from 'next-auth/react'
@@ -11,6 +11,8 @@ import { useQuery } from 'react-query';
 import {AgGridReact} from 'ag-grid-react';
 import AgGridDT from '@/components/AgGridDT'
 import { toast } from 'react-toastify'
+import AddNewCustomer from '@/components/Users/Customer/AddNewCustomer'
+import UpdateCustomer from '@/components/Users/Customer/UpdateCustomer'
 
 
 const Customers = () => {
@@ -22,13 +24,12 @@ const Customers = () => {
 
 	const users = data?.users.filter((user)=> user.role === 'user');
 
-	console.log(users)
+	// console.log(users)
 
 	// console.log(data?.users)
   
 	// columns definition
-	const columnDefs =
-		[
+	const columnDefs = [
     
 			{ headerName: "ID", field: "_id", maxWidth: 150 },
 			{ headerName: "Full Name", field: "fullName", maxWidth: 150 },
@@ -45,7 +46,7 @@ const Customers = () => {
 				sortable: false,
 				filter: false,
 				floatingFilter: false , cellRendererFramework: (params) => <div>
-					<UpdateUserPopUp  />
+					<UpdateCustomer  updateUserInfo={params?.data}/>
 					<Button
 										style={{marginLeft : "20px"}}
 										bg={"#05A8F5"}
@@ -59,7 +60,7 @@ const Customers = () => {
 									>Delete</Button>
 				</div>
 			}
-		]
+	]
 	
   
 	const defaultColDef = {
@@ -100,14 +101,15 @@ const Customers = () => {
 			await deleteUser(id);
 
 			const filterData = users?.filter((user) => user._id !== id);
-			setUsers(filterData);
+			// setUsers(filterData);
 			toast.success("User deleted successful")
 		} catch (error) {
 			console.log(error.message);
 			toast.error(error.message);
 		}
 	}
-
+  
+	
 	
 
 	return (
@@ -116,7 +118,7 @@ const Customers = () => {
 			<div className='d-flex justify-content-between align-items-center m-3' >
 
 				<h2>Customer List </h2>
-				<AddUserPopUp />
+				<AddNewCustomer />
 
 
 			</div>

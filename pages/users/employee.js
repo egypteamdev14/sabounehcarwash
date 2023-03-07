@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/Employee/AddUserPopUp'
+import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
 import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
 import { deleteUser, fetchAllUsers } from '@/services/users'
 import { useSession } from 'next-auth/react'
@@ -11,6 +11,7 @@ import { toast } from 'react-toastify'
 import AddEmployee from '@/components/Users/Employee/AddEmployee'
 import AgGridDT from '@/components/AgGridDT'
 import { AgGridReact } from 'ag-grid-react'
+import UpdateEmployee from '@/components/Users/Employee/UpdateEmployee'
 
 const Employee = () => {
 
@@ -61,7 +62,7 @@ const Employee = () => {
 				sortable: false,
 				filter: false,
 				floatingFilter: false , cellRendererFramework: (params) => <div>
-					<UpdateUserPopUp  />
+					<UpdateEmployee updateUserInfo={params?.data}  />
 					<Button
 										style={{marginLeft : "20px"}}
 										bg={"#05A8F5"}

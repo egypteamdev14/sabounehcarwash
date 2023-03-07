@@ -5,19 +5,22 @@ import { FiUsers } from 'react-icons/fi';
 function DropDown() {
   return (
     <Dropdown className='drop'>
+     <div className='flex align-items-center'>
+     <FiUsers className='icon' /> 
       <Dropdown.Toggle className='drop-down' style={{backgroundColor: "transparent", border: "none", display: "flex", alignItems: "center" ,gap: "22px"}}  id="dropdown-basic">
-			<FiUsers className='icon' />  Users
+			 Users
       </Dropdown.Toggle>
+     </div>
 
       <Dropdown.Menu style={{backgroundColor: "transparent"}}>
-        <Dropdown.Item >
+        <Dropdown.Item  className='py-3'>
 					<Link href={"/users/employee"}>Employee</Link>
-				</Dropdown.Item>
-        <Dropdown.Item >
+				</Dropdown.Item >
+        <Dropdown.Item className='py-3'>
 				<Link href={"/users/serviceprovider"}>Service provider </Link>
 
 				</Dropdown.Item>
-        <Dropdown.Item >
+        <Dropdown.Item  className='py-3'>
 				<Link href={"/users/customers"}>Customers</Link>
 
 				</Dropdown.Item>

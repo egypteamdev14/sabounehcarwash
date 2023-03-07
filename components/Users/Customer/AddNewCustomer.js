@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
-
-import Modal from 'react-bootstrap/Modal';
-import Button from '../../Button';
-import { addUser, updateUser } from '@/services/users';
+import Button from '@/components/Button';
+import { addUser } from '@/services/users';
+import React, { useState } from 'react'
+import { Form, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-function AddEmployee({ updateUserInfo }) {
+const AddNewCustomer = () => {
+
 	const [show, setShow] = useState(false);
 
 	const [formData, setFormData] = useState({
-		fullName: updateUserInfo ? updateUserInfo.fullName : "",
-		phoneNumber: updateUserInfo ? updateUserInfo.phoneNumber : "",
-		password: updateUserInfo ? updateUserInfo.password : "",
-		statusAccount: "verified",
-		// email: "",
-		role: "employee"
+		phoneNumber: "",
+		role: "user",
+		fullName: "",
+		email: "",
+		password: "",
+		// statusAccount: ""
+
 	});
 
-	const { phoneNumber, fullName, password,  } = formData
+	const { phoneNumber, role, fullName, password, email } = formData
 
 	// console.log(updateUserInfo)
 
@@ -34,9 +34,9 @@ function AddEmployee({ updateUserInfo }) {
 	// handel Add User
 	const handelAdd = async (e) => {
 		e.preventDefault();
+
 		try {
 			await addUser(formData);
-
 			toast.success("User added successfully");
 			setShow(false)
 
@@ -47,34 +47,36 @@ function AddEmployee({ updateUserInfo }) {
 	}
 
 
+
 	return (
 		<>
 
 			<Button
 				bg={"#05A8F5"}
 				color={"#ffffff"}
-				width={"170px"}
+				width={"130px"}
 				height={"35px"}
 				radius={"8px"}
 				fontSize={"1rem"}
 				onClick={handleShow}
-			>Add New Employee </Button>
+			>Add New User </Button>
 
 			<Modal centered show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Add New Employee</Modal.Title>
+					<Modal.Title>Add New User</Modal.Title>
 				</Modal.Header>
 				<Modal.Body className=''>
 					<Form onSubmit={handelAdd}>
+						{/* Full Name */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Full Name</Form.Label>
 							<Form.Control type="text" placeholder="Enter FullName" name='fullName' required onChange={(e) => handelChange(e)} value={fullName} />
 							<Form.Text className="text-muted">
 
-								We will never share your Info.
+								We will never share your email with anyone else.
 							</Form.Text>
 						</Form.Group>
-						
+						{/* Mobile Number */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Mobile Number</Form.Label>
 							<Form.Control type="text" placeholder="Enter Mobile Number" name='phoneNumber' required onChange={(e) => handelChange(e)} value={phoneNumber} />
@@ -82,18 +84,28 @@ function AddEmployee({ updateUserInfo }) {
 								we will never share your info
 							</Form.Text>
 						</Form.Group>
+           
+					  {/* Email */}
+						<Form.Group className="mb-3" controlId="formBasicEmail">
+							<Form.Label>Email</Form.Label>
+							<Form.Control type="email" placeholder="Enter email" name='email' required onChange={(e) => handelChange(e)} value={email} />
+							<Form.Text className="text-muted">
 
-						  {/* <Form.Select className="mb-3" aria-label="Default select example" name='statusAccount' required onChange={(e) => handelChange(e)} value={statusAccount}>
+								We will never share your Info.
+							</Form.Text>
+						</Form.Group>
+
+						{/* <Form.Select className="mb-3" aria-label="Default select example" name='statusAccount' required onChange={(e) => handelChange(e)} value={statusAccount}>
 								<option>Select Your Status</option>
 								<option value="verified">verified</option>
 								<option value="block">block</option>
 	
 							</Form.Select> */}
 
-						<Form.Group className="mb-3" controlId="formBasicPassword">
+						{/* <Form.Group className="mb-3" controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
 							<Form.Control type="password" placeholder="Password" name='password' required onChange={(e) => handelChange(e)} value={password} />
-						</Form.Group>
+						</Form.Group> */}
 
 						<div className='d-flex align-items-center justify-content-center'>
 							<Button
@@ -127,4 +139,6 @@ function AddEmployee({ updateUserInfo }) {
 	);
 }
 
-export default AddEmployee;
+
+
+export default AddNewCustomer

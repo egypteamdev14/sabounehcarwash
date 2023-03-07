@@ -4,7 +4,7 @@ import { Spinner } from "react-bootstrap";
 export const Loader = () => {
 	return (
 		<>
-			<div className="flex items-center justify-items-center w-[100vw] h-[100vh]">
+			<div className="flex items-center justify-items-center w-[50vw] h-[100vh]">
 				{/* <Spinner animation="grow" /> */}
 				<div dir="auto" className="custom-loader-animation">
 					<span>S</span>

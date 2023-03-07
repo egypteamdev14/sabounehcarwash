@@ -1,19 +1,20 @@
 import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/Employee/AddUserPopUp'
+import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
 import AddWasher from '@/components/Users/Washer/AddWasher'
-import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
+
 import UpdateWasher from '@/components/Users/Washer/UpdateWasher'
 import { deleteUser, fetchAllUsers } from '@/services/users'
 import { useSession } from 'next-auth/react'
-import React, { useState } from 'react'
-import {  Table } from 'react-bootstrap'
+import React, {  useState } from 'react'
+// import {  Table } from 'react-bootstrap'
 import { useQuery } from 'react-query'
 import AgGridDT from '@/components/AgGridDT'
 
 const ServiceProvider = () => {
   
   const [gridApi, setGridApi] = useState(null)
-
+  
+	// const [washerData, setWasherData] = useState([])
   
 	const { data: session, status } = useSession();
 
@@ -22,11 +23,10 @@ const ServiceProvider = () => {
 
 	const serviceProvider = data?.users.filter((user) => user.role === 'serviceProvider');
 
-	console.log(serviceProvider)
+	// console.log(serviceProvider);
 
 	// columns definition
-	const columnDefs =
-		[
+	const columnDefs = [
     
 			{ headerName: "ID", field: "_id", maxWidth: 150 },
 			{ headerName: "Full Name", field: "fullName", maxWidth: 150 },
@@ -43,7 +43,7 @@ const ServiceProvider = () => {
 				sortable: false,
 				filter: false,
 				floatingFilter: false , cellRendererFramework: (params) => <div>
-					<UpdateWasher  />
+					<UpdateWasher updateWasherData={params?.data} />
 					<Button
 										style={{marginLeft : "20px"}}
 										bg={"#05A8F5"}
@@ -115,6 +115,19 @@ const ServiceProvider = () => {
 
 
 			</div>
+
+			<Button
+			 onClick={onBtExport}
+			 bg={"#05A8F5"}
+			 color={"#ffffff"}
+			 width={"130px"}
+			 height={"35px"}
+			 radius={"8px"}
+			 fontSize={"1rem"}
+			 cl={"mt-2 mb-3"}
+			 >
+			 Export to Excel
+			</Button>
 
 			{/* <Table striped bordered hover>
 				<thead>
