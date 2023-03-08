@@ -3,9 +3,9 @@ import { Form } from 'react-bootstrap';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from '../../Button';
-import { addNewWasher, addUser, updateUser, updateWasher } from '@/services/users';
+import {  updateWasher } from '@/services/users';
 import { toast } from 'react-toastify';
-import { MdEdit } from 'react-icons/md';
+// import { MdEdit } from 'react-icons/md';
 
 function UpdateWasher({ updateWasherData }) {
 	const [show, setShow] = useState(false);
@@ -50,7 +50,7 @@ function UpdateWasher({ updateWasherData }) {
 	}
 
 	// handle image change
-	const handelFileChange = (e)=> {
+	const handelImageChange = (e)=> {
     setImageFile(e.target.files[0])
 	}
 
@@ -90,7 +90,7 @@ function UpdateWasher({ updateWasherData }) {
 	return (
 		<>
 
-			{/* <Button
+			<Button
 				bg={"#05A8F5"}
 				color={"#ffffff"}
 				width={"170px"}
@@ -98,8 +98,8 @@ function UpdateWasher({ updateWasherData }) {
 				radius={"8px"}
 				fontSize={"1rem"}
 				onClick={handleShow}
-			>Update Washer </Button> */}
-							  <MdEdit style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30}/>
+			>Update Washer </Button>
+							  {/* <MdEdit style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30}/> */}
 
 
 			<Modal centered show={show} onHide={handleClose} size="lg">
@@ -152,7 +152,7 @@ function UpdateWasher({ updateWasherData }) {
 								{/* Choose Image */}
 								<Form.Group className="mb-3" controlId="formBasicEmail">
 									<Form.Label>Chose Image</Form.Label>
-									<Form.Control type="file" placeholder="chose Image" name='image' required onChange={handelFileChange} />
+									<Form.Control type="file" placeholder="chose Image" name='image' required onChange={handelImageChange} />
 
 								</Form.Group>
 

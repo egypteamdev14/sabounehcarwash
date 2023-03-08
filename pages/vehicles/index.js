@@ -11,7 +11,7 @@ const Vehicles = () => {
 
 	const { data, error, isLoading } = useQuery("getVehicles", getAllVehicles);
   
-  console.log(data);
+  
 
 	const handleDelete = async(id)=> {
        
@@ -46,6 +46,7 @@ const Vehicles = () => {
 					<tbody> 
 						{data?.length === 0 ? <tr className='fs-3 p-4'>NO DATA TO SHOW</tr> : null}
 						{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
+						{error !== null ? <tr className='fs-3 p-4'> Something went wrong </tr>: null}
 					{data?.vehicle?.map((user) => (
 
 						<tr key={user._id}>

@@ -1,10 +1,10 @@
 import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
+// import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
 import AddWasher from '@/components/Users/Washer/AddWasher'
 
 import UpdateWasher from '@/components/Users/Washer/UpdateWasher'
 import { deleteUser, getAllWasher } from '@/services/users'
-import { useSession } from 'next-auth/react'
+// import { useSession } from 'next-auth/react'
 import React, {  useState } from 'react'
 
 import { useQuery } from 'react-query'
@@ -14,10 +14,7 @@ import { MdOutlineDelete } from 'react-icons/md'
 const ServiceProvider = () => {
   
   const [gridApi, setGridApi] = useState(null)
-  
-	// const [washerData, setWasherData] = useState([])
-  
-	const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
 
 	const { data, error, isLoading } = useQuery("getUsers", getAllWasher);
@@ -26,8 +23,7 @@ const ServiceProvider = () => {
 
 	// columns definition
 	const columnDefs = [
-    
-			
+
 			{ headerName: "Full Name", field: "fullName", maxWidth: 150 },
 			{ headerName: "Phone Number", field: "phoneNumber", maxWidth: 150},
 			
@@ -77,7 +73,7 @@ const ServiceProvider = () => {
       };
     } else {
       return {
-        backgroundColor: "#DFDFDF",
+        backgroundColor: "#e0e0e0",
         color: "#001C29",
       };
     }
@@ -123,7 +119,6 @@ const ServiceProvider = () => {
 
 
 			<AgGridDT
-			 
 			 columnDefs={columnDefs}
 			 rowData={data?.washer}
 			 defaultColDef={defaultColDef}  
@@ -134,4 +129,4 @@ const ServiceProvider = () => {
 	)
 }
 
-export default ServiceProvider
+export default   ServiceProvider

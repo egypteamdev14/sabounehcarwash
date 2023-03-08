@@ -11,7 +11,7 @@ const AddVehicle = () => {
 		exteriorAndInteriorPrice:''
 	});
 
-	const [image, setImage] = useState('')
+	// const [image, setImage] = useState('')
 
 
 	return (

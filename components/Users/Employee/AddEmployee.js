@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from '../../Button';
-import { addUser, updateUser } from '@/services/users';
+import { addUser } from '@/services/users';
 import { toast } from 'react-toastify';
 
 function AddEmployee({ updateUserInfo }) {

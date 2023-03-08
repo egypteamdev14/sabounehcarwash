@@ -4,9 +4,9 @@ import { Form } from 'react-bootstrap';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from '../Button';
-import { addUser, updateUser } from '@/services/users';
+// import { addUser, updateUser } from '@/services/users';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+// import axios from 'axios';
 import { addSubscription } from '@/services/subscription';
 
 const AddNewSubscriptionPopUp = () => {

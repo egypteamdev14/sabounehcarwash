@@ -86,7 +86,7 @@ const Employee = () => {
       };
     } else {
       return {
-        backgroundColor: "#DFDFDF",
+        backgroundColor: "#e0e0e0",
         color: "#001C29",
       };
     }
@@ -128,60 +128,3 @@ const Employee = () => {
 
 export default Employee;
 
-
-
-
-    {/* <AgGridReact 
-			  rowData={employee}
-				columnDefs={columnDefs}
-				defaultColDef={defaultColDef}
-				onGridReady={onGridReady}
-			  rowHeight={"auto"}
-
-			/> */}
-
-		{/* <Table striped bordered hover>
-				<thead>
-					<tr>
-						<th>#ID</th>
-						<th>Full Name</th>
-						<th>Phone Number</th>
-						<th style={{ width: "20%" }}>Creation of account date</th>
-						<th >last login date</th>
-						<th >employee state</th>
-						<th >Privilege</th>
-						<th>Delete</th>
-						<th>Update</th>
-					</tr>
-				</thead>
-				<tbody>
-					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-					{employee?.map((user) => (
-
-						<tr key={user._id}>
-							<td>{user._id.slice(0, 8)}</td>
-							<td>{user.fullName}</td>
-							<td>{user.phoneNumber}</td>
-							<td >{user.createdAt}</td>
-							<td >{user.lastLogin}</td>
-							<td >{user.status}</td>
-							<td >{user.permissions}</td>
-							
-							<td>
-								<Button
-									bg={"#05A8F5"}
-									color={"#ffffff"}
-									width={"130px"}
-									height={"35px"}
-									radius={"8px"}
-									fontSize={"1rem"}
-									onClick={() => handleDelete(user._id)}
-								>Delete</Button> </td>
-							<td>
-								<UpdateUserPopUp id={user._id} />
-							</td>
-						</tr>
-					))}
-
-				</tbody>
-			</Table> */}

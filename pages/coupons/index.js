@@ -1,19 +1,21 @@
 import AgGridDT from '@/components/AgGridDT';
 import Button from '@/components/Button';
-import { getAllOrders } from '@/services/orders';
-
+import AddCoupon from '@/components/Coupons/AddCoupon';
+import UpdateCoupon from '@/components/Coupons/UpdateCoupon';
+import { deleteCoupon, getAllCoupons } from '@/services/coupons';
 import React, { useState } from 'react'
-
+import { MdOutlineDelete } from 'react-icons/md';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 
-
-const Orders = () => {
-
+const Coupons = () => {
+	 
+		
 	const [gridApi, setGridApi] = useState(null)
 
 
 
-	const { data, error, isLoading } = useQuery("getOrders", getAllOrders);
+	const { data, error, isLoading } = useQuery("addCoupon", getAllCoupons);
 
 
 
@@ -21,15 +23,28 @@ const Orders = () => {
 	const columnDefs = [
 
 		{ headerName: "ID", field: "_id", maxWidth: 100 },
-		{ headerName: "Created date", field: "createdAt", maxWidth: 150 },
+		{ headerName: "Coupon Name", field: "title", maxWidth: 150 },
 		// { headerName: "Start Wash date", field: "phoneNumber", maxWidth: 150 },
 
-		{ headerName: "Order State", field: "status", maxWidth: 300 },
-		{ headerName: "Customer Name", field: "user.fullName" },
-		{ headerName: "Washer Name", field: "sysProvider.fullName", maxWidth: 170 },
-		{ headerName: "Service type ", field: "washType" },
-		{ headerName: "Vehicle type ", field: "vehicleId.title" },
-		{ headerName: "Payment Method ", field: "paymentMethod" },
+		{ headerName: "Number Of Use", field: "numberOfUse", maxWidth: 300 },
+		{ headerName: "Discount", field: "discount" },
+		{ headerName: "Created At", field: "createdAt", maxWidth: 170 },
+		{ headerName: "Updated At ", field: "updatedAt" },
+		{
+			headerName: "Actions",
+			field: "id",
+			minWidth: 300,
+			sortable: false,
+			filter: false,
+			floatingFilter: false , cellRendererFramework: (params) => (
+				<div className='flex gap-4'>
+				<UpdateCoupon updateCaponInfo={params?.data}  />
+				
+				<MdOutlineDelete style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30} onClick={() => handleDelete(params?.data._id)}/>
+
+			</div>
+			)
+		}
 		
 	]
 
@@ -65,27 +80,26 @@ const Orders = () => {
 			};
 		}
 	}
-
-	// delete 
-	// const handleDelete = async (id) => {
-	// 	try {
-	// 		await deleteUser(id);
-
-	// 		const filterData = users?.filter((user) => user._id !== id);
-	// 		// setUsers(filterData);
-	// 		toast.success("User deleted successful")
-	// 	} catch (error) {
-	// 		console.log(error.message);
-	// 		toast.error(error.message);
-	// 	}
-	// }
+  
+	// delete Coupon
+  const handleDelete = async (id) => {
+		try {
+			await deleteCoupon(id);
+			toast.success("Coupon deleted successful")
+		} catch (error) {
+			console.log(error.message);
+			toast.error(error.message);
+		}
+	}
 
 	return (
 		<section className='orders'>
 			
 				<div className='d-flex justify-content-between align-items-center m-3' >
 
-					<h2> Order list </h2>
+					<h2> Coupons  </h2>
+
+					<AddCoupon />
 					
 
 
@@ -109,7 +123,7 @@ const Orders = () => {
 				<AgGridDT
 
 					columnDefs={columnDefs}
-					rowData={data?.orders}
+					rowData={data}
 					defaultColDef={defaultColDef}
 					onGridReady={onGridReady}
 					getRowStyle={getRowStyle}
@@ -117,6 +131,7 @@ const Orders = () => {
 		
 		</section>
 	)
+	
 }
 
-export default Orders
+export default Coupons

@@ -1,5 +1,5 @@
 import Button from '@/components/Button';
-import { addUser, updateUser } from '@/services/users';
+import { updateUser } from '@/services/users';
 import React, { useState } from 'react'
 import {  Form, Modal } from 'react-bootstrap';
 import { MdEdit } from 'react-icons/md';
@@ -52,9 +52,8 @@ const UpdateCustomer = ({updateUserInfo}) => {
 	
 		return (
 			<>
-							  <MdEdit style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30}/>
 	      
-				{/* <Button
+				<Button
 					bg={"#05A8F5"}
 					color={"#ffffff"}
 					width={"130px"}
@@ -62,7 +61,12 @@ const UpdateCustomer = ({updateUserInfo}) => {
 					radius={"8px"}
 					fontSize={"1rem"}
 					onClick={handleShow}
-				>Update User </Button> */}
+				>
+					Update User
+					{/* <MdEdit style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30}/> */}
+					
+					
+					  </Button>
 	
 				<Modal centered show={show} onHide={handleClose}>
 					<Modal.Header closeButton>

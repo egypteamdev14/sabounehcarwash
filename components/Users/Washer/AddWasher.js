@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-
+// import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import Modal from 'react-bootstrap/Modal';
 import Button from '../../Button';
-import { addNewWasher, addUser, updateUser } from '@/services/users';
+import { addNewWasher  } from '@/services/users';
 import { toast } from 'react-toastify';
 
 function AddWasher({ updateUserInfo }) {
 	const [show, setShow] = useState(false);
   const [imageFile, setImageFile] = useState('');
+  
+	const [center, setCenter] =useState([])
+
+	// const [coordinates, setCoordinates] = useState([])
+
 	const [formData, setFormData] = useState({
 		fullName: updateUserInfo ? updateUserInfo.fullName : "",
 		phoneNumber: updateUserInfo ? updateUserInfo.phoneNumber : "",
@@ -83,10 +88,17 @@ function AddWasher({ updateUserInfo }) {
 		}
 
 	}
+  
 
+	useEffect(()=> {
+		navigator?.geolocation?.getCurrentPosition(function(position) {
+			setCenter([position.coords.latitude, position.coords.longitude])
+    });
+	},[])
+
+	console.log(center)
 	
-
-
+  
 	return (
 		<>
 
@@ -219,7 +231,18 @@ function AddWasher({ updateUserInfo }) {
 
 						</Form.Select>
 
-
+						{/* <div>
+							<MapContainer center={center} zoom={12} >
+								<TileLayer
+									url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+								/>
+								{this.state.currentPos && <Marker position={this.state.currentPos} draggable={true}>
+									<Popup position={this.state.currentPos}>
+										Current location: <pre>{JSON.stringify(this.state.currentPos, null, 2)}</pre>
+									</Popup>
+								</Marker>}
+							</MapContainer>
+						</div> */}
 
 						<div className='d-flex align-items-center justify-content-center'>
 							<Button

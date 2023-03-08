@@ -1,4 +1,4 @@
-import Button from '@/components/Button'
+
 import { getAllReviews } from '@/services/reviews'
 import React from 'react'
 import { Table } from 'react-bootstrap'
@@ -8,8 +8,7 @@ import { useQuery } from 'react-query'
 const Reviews = () => {
 
 	const { data, error, isLoading } = useQuery("getReviews", getAllReviews)
-  
-  console.log(data)
+
 
 	return (
 		<section className='reviews'>
@@ -42,7 +41,8 @@ const Reviews = () => {
 							<td >{user.createdAt.split("T")[0] } </td>
 							<td >{user.updatedAt.split("T")[0]}</td>
 							<td>
-								<MdOutlineDelete style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30} onClick={() => handleDelete(user._id)}/> </td>
+								<MdOutlineDelete style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30} onClick={() => handleDelete(user._id)}/> 
+							</td>
 							<td>
 
 							  <MdEdit style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30}/>

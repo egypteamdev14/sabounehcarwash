@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 
 import Button from "../components/Button"
-import { signIn, useSession } from 'next-auth/react';
-import axios from 'axios';
+import { signIn } from 'next-auth/react';
+// import axios from 'axios';
 import { useRouter } from 'next/router';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 
@@ -27,7 +27,7 @@ const SignIn = () => {
 	const [emailError, setEmailError] = useState('')
 	const [passwordError, setPasswordError] = useState('')
 
-	const { data: session, status } = useSession();
+	// const { data: session, status } = useSession();
 
 	const showPassword = () => setShow((prev) => !prev)
 
@@ -108,7 +108,7 @@ const SignIn = () => {
 						{passwordError && <p className="error-message">{passwordError}</p>}
 					</div>
 
-					<div className="remember">
+					{/* <div className="remember">
 						<p>Remember Me</p>
 						<div>
 							<input
@@ -121,7 +121,7 @@ const SignIn = () => {
 							<label htmlFor="remember">Remember</label>
 						</div>
 
-					</div>
+					</div> */}
 
 					<div className="login-btn">
 						<Button

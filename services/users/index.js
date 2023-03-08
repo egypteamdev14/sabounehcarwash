@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-// fetch All user (main page)
+// fetch All user 
 export const fetchAllUsers = async () => {
 	const response = await axios({
 		method: "get",

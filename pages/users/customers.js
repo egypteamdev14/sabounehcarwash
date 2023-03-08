@@ -1,14 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Button from '@/components/Button'
-// import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
-// import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
 import { deleteUser, fetchAllUsers } from '@/services/users'
 import { useSession } from 'next-auth/react'
 import React, { useCallback, useState } from 'react'
-// import { Table } from 'react-bootstrap'
 import { useQuery } from 'react-query';
-
-// import { AgGridReact } from 'ag-grid-react';
 import AgGridDT from '@/components/AgGridDT'
 import { toast } from 'react-toastify'
 import AddNewCustomer from '@/components/Users/Customer/AddNewCustomer'
@@ -25,9 +20,7 @@ const Customers = () => {
 
 	const users = data?.users?.filter((user) => user.role === 'user');
 
-	// console.log(users)
 
-	// console.log(data?.users)
 
 	// columns definition
 	const columnDefs = [
@@ -49,9 +42,8 @@ const Customers = () => {
 			floatingFilter: false, cellRendererFramework: (params) => <div className='flex gap-4'>
 				<UpdateCustomer updateUserInfo={params?.data} />
 
-				<MdOutlineDelete style={{ color: "#05A8F5", cursor: "pointer" }} fontSize={30} onClick={() => handleDelete(params?.data?._id
-				)} />
-				{/* <Button
+				{/* <MdOutlineDelete style={{ color: "#05A8F5", cursor: "pointer" }} fontSize={30} onClick={() => handleDelete(params?.data?._id)} /> */}
+				<Button
 										style={{marginLeft : "20px"}}
 										bg={"#05A8F5"}
 										color={"#ffffff"}
@@ -61,7 +53,7 @@ const Customers = () => {
 										fontSize={"1rem"}
 										onClick={() => handleDelete(params?.data?._id
 											)}
-									>Delete</Button> */}
+									>Delete</Button>
 			</div>
 		}
 	]
@@ -93,7 +85,7 @@ const Customers = () => {
 			};
 		} else {
 			return {
-				backgroundColor: "#DFDFDF",
+				backgroundColor: "#e0e0e0",
 				color: "#001C29",
 			};
 		}
@@ -139,49 +131,7 @@ const Customers = () => {
 			>
 				Export to Excel
 			</Button>
-			{/* <Table striped bordered hover>
-				<thead>
-					<tr>
-						<th>#ID</th>
-						<th>Full Name</th>
-						<th>Phone Number</th>
-						<th style={{ width: "20%" }}>Creation of account date</th>
-						<th >last login date</th>
-						<th >employee state</th>
-						<th>Delete</th>
-						<th>Update</th>
-					</tr>
-				</thead>
-				<tbody>
-					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-					{users?.map((user) => (
 
-						<tr key={user._id}>
-							<td>{user._id.slice(0, 8)}</td>
-							<td>{user.fullName}</td>
-							<td>{user.phoneNumber}</td>
-							<td >{user.role}</td>
-							<td >{user.lastLogin}</td>
-							<td >{user.status}</td>
-
-							<td>
-								<Button
-									bg={"#05A8F5"}
-									color={"#ffffff"}
-									width={"130px"}
-									height={"35px"}
-									radius={"8px"}
-									fontSize={"1rem"}
-									onClick={() => handleDelete(user._id)}
-								>Delete</Button> </td>
-							<td>
-								<UpdateUserPopUp id={user._id} />
-							</td>
-						</tr>
-					))}
-
-				</tbody>
-			</Table> */}
 
 			<AgGridDT
 
