@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from '../../Button';
 import { addNewWasher, addUser, updateUser, updateWasher } from '@/services/users';
 import { toast } from 'react-toastify';
+import { MdEdit } from 'react-icons/md';
 
 function UpdateWasher({ updateWasherData }) {
 	const [show, setShow] = useState(false);
@@ -89,7 +90,7 @@ function UpdateWasher({ updateWasherData }) {
 	return (
 		<>
 
-			<Button
+			{/* <Button
 				bg={"#05A8F5"}
 				color={"#ffffff"}
 				width={"170px"}
@@ -97,7 +98,9 @@ function UpdateWasher({ updateWasherData }) {
 				radius={"8px"}
 				fontSize={"1rem"}
 				onClick={handleShow}
-			>Update Washer </Button>
+			>Update Washer </Button> */}
+							  <MdEdit style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30}/>
+
 
 			<Modal centered show={show} onHide={handleClose} size="lg">
 				<Modal.Header closeButton>

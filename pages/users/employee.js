@@ -1,33 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
-import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp'
+
 import { deleteUser, fetchAllUsers } from '@/services/users'
-import { useSession } from 'next-auth/react'
-import { Table } from 'react-bootstrap'
+
 import { useQuery } from 'react-query'
 import { toast } from 'react-toastify'
 import AddEmployee from '@/components/Users/Employee/AddEmployee'
 import AgGridDT from '@/components/AgGridDT'
-import { AgGridReact } from 'ag-grid-react'
+
 import UpdateEmployee from '@/components/Users/Employee/UpdateEmployee'
+import { MdOutlineDelete } from 'react-icons/md'
 
 const Employee = () => {
 
-  
 	const [gridApi, setGridApi] = useState(null)
-
-	
-
 
 	const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
 
-	const employee = data?.users.filter((user)=> user.role === 'employee');
-
-	console.log(employee);
-
-	
+	const employee = data?.users?.filter((user)=> user.role === 'employee');
 
 	const handleDelete = async (id) => {
 		console.log(id)
@@ -61,19 +52,11 @@ const Employee = () => {
 				minWidth: 400,
 				sortable: false,
 				filter: false,
-				floatingFilter: false , cellRendererFramework: (params) => <div>
+				floatingFilter: false , cellRendererFramework: (params) => <div className='flex gap-4'>
 					<UpdateEmployee updateUserInfo={params?.data}  />
-					<Button
-										style={{marginLeft : "20px"}}
-										bg={"#05A8F5"}
-										color={"#ffffff"}
-										width={"130px"}
-										height={"35px"}
-										radius={"8px"}
-										fontSize={"1rem"}
-										onClick={() => handleDelete(params?.data?._id
-											)}
-									>Delete</Button>
+					
+          <MdOutlineDelete style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30} onClick={() => handleDelete(user._id)}/>
+
 				</div>
 			}
 		]

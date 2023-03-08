@@ -4,7 +4,7 @@ import axios from "axios";
 export const getAllReviews = async () => {
 	const response = await axios({
 		method: "get",
-		url: `/api/reviews/`,
+		url: `/api/reviews/63edf6480f86e10312e777fa`,
 	});
 	return response.data;
 };

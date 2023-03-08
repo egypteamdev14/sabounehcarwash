@@ -80,7 +80,7 @@ const SignIn = () => {
 			<div className="form">
 				<form onSubmit={login}>
 					<div className="email">
-						<label htmlFor="text" >رقم الهاتف</label>
+						<label htmlFor="text" >Mobile Number</label>
 						<input
 							type="text"
 							name="username"
@@ -93,7 +93,7 @@ const SignIn = () => {
 						{emailError && <p className="error-message">{emailError}</p>}
 					</div>
 					<div className="password">
-						<label htmlFor="password" >كلمة المرور</label>
+						<label htmlFor="password" >Password</label>
 						<input
 							type={show ? "text" : "password"}
 							name="password"
@@ -109,7 +109,7 @@ const SignIn = () => {
 					</div>
 
 					<div className="remember">
-						<p>نسيت كلمة المرور ؟</p>
+						<p>Remember Me</p>
 						<div>
 							<input
 								type="checkbox"
@@ -118,7 +118,7 @@ const SignIn = () => {
 								value="remember me"
 
 							/>
-							<label htmlFor="remember"> تذكرنى</label>
+							<label htmlFor="remember">Remember</label>
 						</div>
 
 					</div>
@@ -134,7 +134,7 @@ const SignIn = () => {
 							fontWeight={"bold"}
 
 						>
-							تسجيل الدخول
+							 Log In
 						</Button>
 					</div>
 				</form>

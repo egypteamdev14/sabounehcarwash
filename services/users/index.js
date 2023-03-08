@@ -25,6 +25,19 @@ export const addUser = async (data) => {
 	return response.data;
 };
 
+// add new user(add driver)
+export const getAllWasher = async () => {
+	const response = await axios({
+		method: "get",
+		url: "/api/washers/getAllWasher",
+		
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	return response.data;
+};
+
 // add new Washer(add driver)
 export const addNewWasher = async (data) => {
 	const response = await axios({

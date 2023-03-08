@@ -15,6 +15,9 @@ export const Loader = () => {
 					<span>N</span>
 					<span>e</span>
 					<span>H</span>
+					<span>C</span>
+					<span>A</span>
+					<span>R</span>
 					<span>.</span>
 					<span>.</span>
 					<span>.</span>
