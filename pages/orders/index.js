@@ -2,7 +2,7 @@ import AgGridDT from '@/components/AgGridDT';
 import Button from '@/components/Button';
 import { getAllOrders } from '@/services/orders';
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useQuery } from 'react-query';
 
@@ -10,12 +10,24 @@ import { useQuery } from 'react-query';
 const Orders = () => {
 
 	const [gridApi, setGridApi] = useState(null)
-
+//  const [orderData, setOrderData]= useState([]);
 
 
 	const { data, error, isLoading } = useQuery("getOrders", getAllOrders);
 
+  
+	//  useEffect(()=> {
+	// 	const getData = async ()=> {
+	// 	 const res =  await getAllOrders();
+     
+	// 	 setOrderData(res)
 
+	// 	}
+
+	// 	getData()
+	//  },[])
+
+	//  console.log(orderData);
 
 	// columns definition
 	const columnDefs = [

@@ -30,7 +30,7 @@ const Reviews = () => {
 				</thead>
 				<tbody>
 					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-					{data?.map((user) => (
+					{data?.length === 0 ? <h4>No Data To Show</h4> : data?.map((user) => (
 
 						<tr key={user._id}>
 							<td>{user._id.slice(0, 8)}</td>

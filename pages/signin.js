@@ -8,6 +8,7 @@ import { signIn } from 'next-auth/react';
 // import axios from 'axios';
 import { useRouter } from 'next/router';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 
 
@@ -56,7 +57,7 @@ const SignIn = () => {
 				router.push('/');
 				window.location.origin
 			})
-				.catch((error) => console.log("error: ", error));
+				.catch((error) => toast.error(error));
 
 		} else {
 			if (username.trim().length === 0) {
@@ -108,20 +109,7 @@ const SignIn = () => {
 						{passwordError && <p className="error-message">{passwordError}</p>}
 					</div>
 
-					{/* <div className="remember">
-						<p>Remember Me</p>
-						<div>
-							<input
-								type="checkbox"
-								id="remember"
-								name="remember"
-								value="remember me"
-
-							/>
-							<label htmlFor="remember">Remember</label>
-						</div>
-
-					</div> */}
+					
 
 					<div className="login-btn">
 						<Button

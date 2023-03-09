@@ -32,6 +32,7 @@ export const authOptions = {
 				const data = await res.json();
 				// Returning token to set in session
 				if (res.status === 200) {
+					
 					return {
 						token: data,
 					};

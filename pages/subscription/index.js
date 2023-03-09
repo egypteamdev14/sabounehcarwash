@@ -19,9 +19,6 @@ const Subscription = () => {
 	const handleDelete = async (id) => {
 		try {
 			await deleteSubscription(id);
-
-			const filterData = users?.filter((user) => user._id !== id);
-			setUsers(filterData);
 			toast.success("Subscription deleted successful")
 		} catch (error) {
 			console.log(error.message);
@@ -54,30 +51,31 @@ const Subscription = () => {
 				</thead>
 				<tbody>
 					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-					{data?.oneTime.map((user) => (
+					{data?.oneTime.length === 0 ? <h3>No Data To Show</h3> : data?.oneTime.map((user) => (
 
-						<tr key={user._id}>
-							<td>{user._id.slice(0, 8)}</td>
-							<td >{user.title}</td>
-							<td>{user.description}</td>
-							<td><img src={user.image} alt="subscription" width={50} height={50} /></td>
-							<td >{user.price}</td>
-							<td>
-								<Button
-									bg={"#05A8F5"}
-									color={"#ffffff"}
-									width={"130px"}
-									height={"35px"}
-									radius={"8px"}
-									fontSize={"1rem"}
-									onClick={() => handleDelete(user._id)}
-								>Delete</Button> </td>
-							<td>
-								<UpdateNewSubscriptions id={user._id} />
-							</td>
-						</tr>
+<tr key={user._id}>
+	<td>{user._id.slice(0, 8)}</td>
+	<td >{user.title}</td>
+	<td>{user.description}</td>
+	<td><img src={user.image} alt="subscription" width={50} height={50} /></td>
+	<td >{user.price}</td>
+	<td>
+		<Button
+			bg={"#05A8F5"}
+			color={"#ffffff"}
+			width={"130px"}
+			height={"35px"}
+			radius={"8px"}
+			fontSize={"1rem"}
+			onClick={() => handleDelete(user._id)}
+		>Delete</Button> </td>
+	<td>
+		<UpdateNewSubscriptions id={user._id} />
+	</td>
+</tr>
 
-					))}
+))}
+				
 
 
 

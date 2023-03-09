@@ -1,63 +1,65 @@
-import { addNewVehicle } from '@/services/vehicles';
 import React, { useState } from 'react'
 import { Form, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import Button from '../Button';
+import { updateVehicle } from '@/services/vehicles';
 
-const AddVehicle = () => {
+const UpdateVehicle = ({id , vehicleData}) => {
   
 	const [show, setShow] = useState(false);
 
-
   const [formData, setFormData] = useState({
-		title: '',
-		description:'',
-		exteriorPrice:'',
-		exteriorAndInteriorPrice:''
+		title: vehicleData ? vehicleData.title :'',
+		description: vehicleData ? vehicleData.description :'',
+		exteriorPrice: vehicleData ? vehicleData.exteriorPrice :'',
+		exteriorAndInteriorPrice:vehicleData ? vehicleData.exteriorAndInteriorPrice :'',
 	});
-  
-	const {title, description, exteriorPrice, exteriorAndInteriorPrice} = formData;
 
-	//  handel input changes
+	const [image, setImage] = useState('')
+	const {title, description, exteriorPrice, exteriorAndInteriorPrice} = formData
+  
+  //  handel input changes
 	const handelChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	}
 
-	const [image, setImage] = useState('')
-  // handle File change
+	// handle File change
 	const handelFileChange = (e)=> {
     setImage(e.target.files[0])
 	}
 
-	// Add New Vehicle
-	const handelAdd = async (e) => {
-
+	// handle Open And close Modal
+  const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+  
+	// handle Update 
+	const handelUpdate = async(e)=>  {
 		e.preventDefault();
 
 		const vehicleData = new FormData();
-		vehicleData.append('image', image)
-		vehicleData.append('title', title)
-		vehicleData.append('description', description)
-		vehicleData.append('exteriorPrice', exteriorPrice)
-		vehicleData.append('exteriorAndInteriorPrice', exteriorAndInteriorPrice)
+		  vehicleData.append('image', image)
+		  vehicleData.append('title', title)
+		  vehicleData.append('description', description)
+		  vehicleData.append('exteriorPrice', exteriorPrice)
+		  vehicleData.append('exteriorAndInteriorPrice', exteriorAndInteriorPrice);
 
-		try {
-			await addNewVehicle(vehicleData);
-			toast.success("Vehicle added successfully")
+    try {
+			await updateVehicle(id, vehicleData);
+			toast.success("Vehicle Updated successfully")
 			setShow(false)
+
 		} catch (error) {
 			toast.error(error.message)
-		}
-	}
+		} 
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	} 
+
 
 
 	return (
 		<>
-		  	<Button
+		  			<Button
 				bg={"#05A8F5"}
 				color={"#ffffff"}
 				width={"130px"}
@@ -65,50 +67,47 @@ const AddVehicle = () => {
 				radius={"8px"}
 				fontSize={"1rem"}
 				onClick={handleShow}
-			>Add New Vehicle </Button>
+			>Update Vehicle </Button>
 
 			<Modal centered show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Add New User</Modal.Title>
+					<Modal.Title>Update Vehicle</Modal.Title>
 				</Modal.Header>
 				<Modal.Body className=''>
-					<Form onSubmit={handelAdd}>
+					<Form onSubmit={handelUpdate}>
 						{/* Full Name */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Title</Form.Label>
 							<Form.Control type="text" placeholder="Enter Title" name='title' required onChange={(e) => handelChange(e)} value={title} />
-						
+							
 						</Form.Group>
-						{/* Description */}
+						{/* Mobile Number */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Description</Form.Label>
 							<Form.Control type="text" placeholder="Enter description" name='description' required onChange={(e) => handelChange(e)} value={description} />
 						
 						</Form.Group>
-             
+            
 						 {/* Choose Image */}
-						<Form.Group className="mb-3" controlId="formBasicEmail">
+						 <Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Chose Image</Form.Label>
 							<Form.Control type="file" 	placeholder="chose Image" name='imageFile' required onChange={handelFileChange}  />
 							
 						</Form.Group>
-           
+
 					  {/* Exterior Price */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label>Exterior Price</Form.Label>
-							<Form.Control type="number" placeholder="Enter Exterior Price" name='exteriorPrice' required onChange={(e) => handelChange(e)} value={exteriorPrice} />
-							
+							<Form.Control type="text" placeholder="Enter Exterior Price" name='exteriorPrice' required onChange={(e) => handelChange(e)} value={exteriorPrice} />
 						</Form.Group>
 						
-						{/* Enter Exterior And Interior Price */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
-							<Form.Label>Enter Exterior And Interior Price</Form.Label>
-							<Form.Control type="number" placeholder="Enter Exterior And Interior Price" name='exteriorAndInteriorPrice' required onChange={(e) => handelChange(e)} value={exteriorAndInteriorPrice} />
-							
+							<Form.Label>Exterior And Interior Price</Form.Label>
+							<Form.Control type="text" placeholder="Enter Exterior Price" name='exteriorAndInteriorPrice' required onChange={(e) => handelChange(e)} value={exteriorAndInteriorPrice} />			
 						</Form.Group>
 
 						
-             {/* Button handle add */}
+
 						<div className='d-flex align-items-center justify-content-center'>
 							<Button
 								bg={"#05A8F5"}
@@ -143,4 +142,4 @@ const AddVehicle = () => {
 					
 }
 
-export default AddVehicle
+export default UpdateVehicle
