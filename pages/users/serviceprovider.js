@@ -1,84 +1,91 @@
-import Button from '@/components/Button'
-import AddUserPopUp from '@/components/Users/Employee/UpdateEmployee'
-import AddWasher from '@/components/Users/Washer/AddWasher'
+import Button from "@/components/Button";
+import AddUserPopUp from "@/components/Users/Employee/UpdateEmployee";
+import AddWasher from "@/components/Users/Washer/AddWasher";
 
-import UpdateWasher from '@/components/Users/Washer/UpdateWasher'
-import { deleteUser, fetchAllUsers } from '@/services/users'
-import { useSession } from 'next-auth/react'
-import React, {  useState } from 'react'
+import UpdateWasher from "@/components/Users/Washer/UpdateWasher";
+import { deleteUser, fetchAllUsers } from "@/services/users";
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
 // import {  Table } from 'react-bootstrap'
-import { useQuery } from 'react-query'
-import AgGridDT from '@/components/AgGridDT'
+import { useQuery } from "react-query";
+import AgGridDT from "@/components/AgGridDT";
 
 const ServiceProvider = () => {
-  
-  const [gridApi, setGridApi] = useState(null)
-  
-	// const [washerData, setWasherData] = useState([])
-  
-	const { data: session, status } = useSession();
+  const [gridApi, setGridApi] = useState(null);
 
+  // const [washerData, setWasherData] = useState([])
 
-	const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
+  const { data: session, status } = useSession();
 
-	const serviceProvider = data?.users.filter((user) => user.role === 'serviceProvider');
+  const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
 
-	// console.log(serviceProvider);
+  const serviceProvider = data?.users.filter(
+    (user) => user.role === "serviceProvider"
+  );
 
-	// columns definition
-	const columnDefs = [
-    
-			{ headerName: "ID", field: "_id", maxWidth: 150 },
-			{ headerName: "Full Name", field: "fullName", maxWidth: 150 },
-			{ headerName: "Phone Number", field: "phoneNumber", maxWidth: 150},
-			
-			{ headerName: "Creation of account date", field: "createdAt" , maxWidth: 300},
-			{ headerName: "Last login date", field: "lastLogin" },
-			{ headerName: "Employee state", field: "status", maxWidth: 170 },
-			{ headerName: "Privilege", field: "permissions" },
-			{
-				headerName: "Actions",
-				field: "id",
-				minWidth: 400,
-				sortable: false,
-				filter: false,
-				floatingFilter: false , cellRendererFramework: (params) => <div>
-					<UpdateWasher updateWasherData={params?.data} />
-					<Button
-										style={{marginLeft : "20px"}}
-										bg={"#05A8F5"}
-										color={"#ffffff"}
-										width={"130px"}
-										height={"35px"}
-										radius={"8px"}
-										fontSize={"1rem"}
-										onClick={() => handleDelete(params?.data?._id
-											)}
-									>Delete</Button>
-				</div>
-			}
-		]
-	
-  
-	const defaultColDef = {
-			sortable: true,
-			flex: 1,
-			filter: true,
-			floatingFilter: true
-	}
-	
-  //  init 
-	const onGridReady = (params) => {
-    setGridApi(params)
-  }
-  
-	// Export Excel 
-	const onBtExport = () => {
+  // console.log(serviceProvider);
+
+  // columns definition
+  const columnDefs = [
+    { headerName: "ID", field: "_id", maxWidth: 150 },
+    { headerName: "Full Name", field: "fullName", maxWidth: 150 },
+    { headerName: "Phone Number", field: "phoneNumber", maxWidth: 150 },
+
+    {
+      headerName: "Creation of account date",
+      field: "createdAt",
+      maxWidth: 300,
+    },
+    { headerName: "Last login date", field: "lastLogin" },
+    { headerName: "Employee state", field: "status", maxWidth: 170 },
+    { headerName: "Privilege", field: "permissions" },
+    {
+      headerName: "Actions",
+      field: "id",
+      minWidth: 400,
+      sortable: false,
+      filter: false,
+      floatingFilter: false,
+      cellRendererFramework: (params) => (
+        <div>
+			{console.log(params.data)}
+          <UpdateWasher updateWasherData={params?.data} />
+          <Button
+            style={{ marginLeft: "20px" }}
+            bg={"#05A8F5"}
+            color={"#ffffff"}
+            width={"130px"}
+            height={"35px"}
+            radius={"8px"}
+            fontSize={"1rem"}
+            onClick={() => handleDelete(params?.data?._id)}
+          >
+            Delete
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  const defaultColDef = {
+    sortable: true,
+    flex: 1,
+    filter: true,
+    floatingFilter: true,
+  };
+
+  //  init
+  const onGridReady = (params) => {
+    setGridApi(params);
+  };
+
+  // Export Excel
+  const onBtExport = () => {
     gridApi?.api.exportDataAsCsv();
-  }
-   
+  };
+
   // Row Style
-	const getRowStyle = (params) => {
+  const getRowStyle = (params) => {
     if (params.data._id % 2) {
       return {
         backgroundColor: "#FFE7D9",
@@ -90,46 +97,42 @@ const ServiceProvider = () => {
         color: "#001C29",
       };
     }
-  }
-  
-	// delete user
-	const handleDelete = async (id) => {
-		try {
-			await deleteUser(id);
+  };
 
-			const filterData = users?.filter((user) => user._id !== id);
-			setUsers(filterData);
-			toast.success("User deleted successful")
-		} catch (error) {
-			console.log(error.message);
-			toast.error(error.message);
-		}
-	}
+  // delete user
+  const handleDelete = async (id) => {
+    try {
+      await deleteUser(id);
+      const filterData = users?.filter((user) => user._id !== id);
+      setUsers(filterData);
+      toast.success("User deleted successful");
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
 
-	return (
-		<section className='service-provider'>
-			<div className='d-flex justify-content-between align-items-center m-3' >
+  return (
+    <section className="service-provider">
+      <div className="d-flex justify-content-between align-items-center m-3">
+        <h2>Washer List </h2>
+        <AddWasher />
+      </div>
 
-				<h2>Washer List </h2>
-				<AddWasher />
+      <Button
+        onClick={onBtExport}
+        bg={"#05A8F5"}
+        color={"#ffffff"}
+        width={"130px"}
+        height={"35px"}
+        radius={"8px"}
+        fontSize={"1rem"}
+        cl={"mt-2 mb-3"}
+      >
+        Export to Excel
+      </Button>
 
-
-			</div>
-
-			<Button
-			 onClick={onBtExport}
-			 bg={"#05A8F5"}
-			 color={"#ffffff"}
-			 width={"130px"}
-			 height={"35px"}
-			 radius={"8px"}
-			 fontSize={"1rem"}
-			 cl={"mt-2 mb-3"}
-			 >
-			 Export to Excel
-			</Button>
-
-			{/* <Table striped bordered hover>
+      {/* <Table striped bordered hover>
 				<thead>
 					<tr>
 						<th>#ID</th>
@@ -173,16 +176,15 @@ const ServiceProvider = () => {
 				</tbody>
 			</Table> */}
 
-			<AgGridDT
-			 
-			 columnDefs={columnDefs}
-			 rowData={serviceProvider}
-			 defaultColDef={defaultColDef}  
-			 onGridReady={onGridReady}
-			 getRowStyle={getRowStyle}
-			/>
-		</section>
-	)
-}
+      <AgGridDT
+        columnDefs={columnDefs}
+        rowData={serviceProvider}
+        defaultColDef={defaultColDef}
+        onGridReady={onGridReady}
+        getRowStyle={getRowStyle}
+      />
+    </section>
+  );
+};
 
-export default ServiceProvider
+export default ServiceProvider;

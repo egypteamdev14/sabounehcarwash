@@ -58,7 +58,6 @@ const Users = () => {
 				<tbody>
 					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
 					{data?.users.map((user) => (
-
 						<tr key={user._id}>
 							<td>{user._id.slice(0, 8)}</td>
 							<td>{user.fullName}</td>

@@ -60,14 +60,9 @@ const AgGridDT = ({
   ref
 }) => {
   const router = useRouter();
-  
   const { t } = useTranslation("main");
   // const [openBtnsExportsModel, setOpenBtnsExportsModel] = useState(false);
-
   const { locale } = router;
-
-
-  
 
   // const onBtnExport = () => {
   //   convertJsonToExcel(rowData ?? [], "AgGrid Data");
