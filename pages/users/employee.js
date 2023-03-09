@@ -82,12 +82,12 @@ const Employee = () => {
   const getRowStyle = (params) => {
     if (params?.data._id % 2) {
       return {
-        backgroundColor: "#FFE7D9",
+        backgroundColor: "#fff",
         color: "#7A0C2E",
       };
     } else {
       return {
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#fff",
         color: "#001C29",
       };
     }

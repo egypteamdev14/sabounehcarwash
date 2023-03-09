@@ -27,7 +27,6 @@ const UpdateUserPopUp = ({ id }) => {
     e.preventDefault();
     try {
       await updateUser(id, formData);
-
       toast.success("User updated successfully");
       setShow(false);
     } catch (error) {
@@ -70,7 +69,7 @@ const UpdateUserPopUp = ({ id }) => {
             </Form.Select>
             <div className="d-flex align-items-center justify-content-center">
               <Button
-                bg={"#05A8F5"}
+                bg={"#006FA3"}
                 color={"#fff"}
                 width={"40%"}
                 height={"40px"}
@@ -83,20 +82,7 @@ const UpdateUserPopUp = ({ id }) => {
             </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            bg={"#6c757d"}
-            color={"#fff"}
-            width={"20%"}
-            height={"40px"}
-            radius={"5px"}
-            cl="text-center"
-            variant="secondary"
-            onClick={handleClose}
-          >
-            Close
-          </Button>
-        </Modal.Footer>
+     
       </Modal>
     </>
   );

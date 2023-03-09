@@ -13,7 +13,7 @@ import {  signOut } from 'next-auth/react';
 import { sideBarLinks } from "@/helper/sideBarLinks";
 import DropDown from "@/components/DropDown";
 
-const SideBar = ({ sidebar, toggle, setToggle }) => {
+const SideBar = ({ sidebar,setToggle,toggle }) => {
   const { locale, pathname, query, asPath, locales, push } = useRouter();
 
   const router = useRouter();
@@ -67,8 +67,8 @@ const SideBar = ({ sidebar, toggle, setToggle }) => {
             width={"220px"}
             height={"45px"}
             border={"none"}
-            bg={"#189FBE14"}
-            color={"#fff"}
+            bg={"#cdeefe"}
+            color={"#00537b"}
             radius={"8px"}
             fontSize={"16px"}
             fontWeight={"bold"}

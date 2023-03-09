@@ -104,7 +104,7 @@ const AddCoupon = () => {
 
 						<div className='d-flex align-items-center justify-content-center'>
 							<Button
-								bg={"#05A8F5"}
+								bg={"#006FA3"}
 								color={"#fff"}
 								width={"40%"}
 								height={"40px"}
@@ -117,18 +117,6 @@ const AddCoupon = () => {
 						</div>
 					</Form>
 				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						bg={"#6c757d"}
-						color={"#fff"}
-						width={"70px"}
-						height={"30px"}
-						radius={"5px"}
-						onClick={handleClose}>
-						Close
-					</Button>
-
-				</Modal.Footer>
 			</Modal>
 		</>
 	);

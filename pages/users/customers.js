@@ -96,7 +96,6 @@ const Customers = () => {
 			};
 		}
 	}
-
 	// delete user
 	const handleDelete = async (id) => {
 		try {
@@ -123,8 +122,6 @@ const Customers = () => {
         <AddNewCustomer />
       </div>
 
-
-
 		
 
 			<Button
@@ -139,10 +136,7 @@ const Customers = () => {
 			>
 				Export to Excel
 			</Button>
-
-
 			<AgGridDT
-
 				columnDefs={columnDefs}
 				rowData={users}
 				defaultColDef={defaultColDef}

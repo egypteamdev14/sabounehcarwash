@@ -11,7 +11,6 @@ const Vehicles = () => {
 
 	const { data, error, isLoading } = useQuery("getVehicles", getAllVehicles);
   
-  
 
 	const handleDelete = async(id)=> {
        

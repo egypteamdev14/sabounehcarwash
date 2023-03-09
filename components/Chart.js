@@ -2,7 +2,7 @@ import React from "react";
 import { Tooltip } from "react-bootstrap";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-const index = () => {
+const Chart = () => {
     const data = [
         {
           "name": "Page A",
@@ -86,4 +86,5 @@ const index = () => {
   );
 };
 
-export default index;
+export default Chart;
+

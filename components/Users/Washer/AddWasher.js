@@ -282,7 +282,7 @@ function AddWasher({ updateUserInfo }) {
 
             <div className="d-flex align-items-center justify-content-center">
               <Button
-                bg={"#05A8F5"}
+                bg={"#006FA3"}
                 color={"#fff"}
                 width={"40%"}
                 height={"40px"}

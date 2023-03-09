@@ -1,98 +1,99 @@
 .sidebar {
-    width: 17%;
-    height: 100vh;
-    position: fixed;
-    background-color: $dark_color;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 39px;
-    transition: all 1s;
-    z-index: 5;
-    .logo {
-        // margin: 30px auto;
+  width: 17%;
+  height: 100vh;
+  position: fixed;
+  background-color: #ffffff;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 39px;
+  transition: all 1s;
+  z-index: 5;
+  .logo {
+    // margin: 30px auto;
 
-        img {
-            @media screen and (max-width: 1200px) {
-                width: 80% !important;
-            }
-            @media screen and (max-width: 768px) {
-                width: 70% !important;
-            }
-        }
+    img {
+      @media screen and (max-width: 1200px) {
+        width: 80% !important;
+      }
+      @media screen and (max-width: 768px) {
+        width: 70% !important;
+      }
     }
+  }
 
-    .menu-items {
-        ul {
-            margin-top: -220px;
-            padding-left: 1rem;
+  .menu-items {
+    ul {
+      margin-top: -220px;
+      padding-left: 1rem;
 
-            @media screen and (max-width: 768px) {
-                margin-top: -215px;
-            }
+      @media screen and (max-width: 768px) {
+        margin-top: -215px;
+      }
 
-            li {
-                display: flex;
-                gap: 15px;
-                font-size: 20px;
-                align-items: center;
-                margin: 10px;
-                padding: 10px 40px;
-                cursor: pointer;
+      li {
+        display: flex;
+        gap: 15px;
+        font-size: 20px;
+        align-items: center;
+        margin: 10px;
+        padding: 10px 40px;
+        cursor: pointer;
 
-                @media screen and (max-width: 1200px) {
-                    font-size: 14px;
-                }
-
-                @media screen and (max-width: 768px) {
-                    font-size: 14px;
-                }
-
-                a {
-                    @include center;
-                    justify-content: flex-start;
-
-                    gap: 15px;
-                    text-decoration: none;
-                    color: #fff;
-                    .icon {
-                        color: #badde6;
-                    }
-                }
-
-                &.active {
-                    background-color: rgba(216, 216, 216, 0.2);
-                    border-radius: 8px;
-                    color: #000;
-                    width: 90%;
-                    margin: 4px 14px;
-                }
-
-                svg {
-                    font-size: 20px;
-                }
-            }
+        @media screen and (max-width: 1200px) {
+          font-size: 14px;
         }
-    }
 
-    .logout {
-        margin-bottom: 50px !important;
-        button {
-            @include center;
-
-            gap: 2rem;
-
-            @media screen and (max-width: 768px) {
-                width: 120px !important;
-            }
+        @media screen and (max-width: 768px) {
+          font-size: 14px;
         }
+
+        a {
+          @include center;
+          justify-content: flex-start;
+
+          gap: 15px;
+          text-decoration: none;
+          color: #001c29;
+          .icon {
+            color: #00537b;
+          }
+        }
+
+        &.active {
+          background-color: #cdeefe;
+          border-radius: 8px;
+          color: #00537b;
+          width: 90%;
+          margin: 4px 14px;
+        }
+
+        svg {
+          font-size: 20px;
+        }
+      }
     }
+  }
+
+  .logout {
+    margin-bottom: 50px !important;
+    color:#00537b !important;
+    button {
+      @include center;
+
+      gap: 2rem;
+
+      @media screen and (max-width: 768px) {
+        width: 120px !important;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-    }
+  .sidebar {
+    width: 100%;
+  }
 }
