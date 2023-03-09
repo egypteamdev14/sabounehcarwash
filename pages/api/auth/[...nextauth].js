@@ -59,7 +59,7 @@ export const authOptions = {
 			return session
 		},
 		async jwt({ token, user, account, profile, isNewUser }) {
-			user && (token.user = user);
+			 user && (token.user = user);
 			return token;
 		}
 

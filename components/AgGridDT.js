@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 //Ag grid
 import { AgGridReact } from "ag-grid-react";
-import 'ag-grid-community/styles//ag-grid.css';
-import 'ag-grid-community/styles//ag-theme-alpine.css';
+import "ag-grid-community/styles//ag-grid.css";
+import "ag-grid-community/styles//ag-theme-alpine.css";
 // import "ag-grid-community/dist/styles//ag-theme-alpine-dark.css";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -57,24 +57,17 @@ const AgGridDT = ({
   rowMultiSelectWithClick,
   loading,
   getRowClass,
-  ref
+  ref,
 }) => {
   const router = useRouter();
-  
   const { t } = useTranslation("main");
   // const [openBtnsExportsModel, setOpenBtnsExportsModel] = useState(false);
-
   const { locale } = router;
-
-
-  
 
   // const onBtnExport = () => {
   //   convertJsonToExcel(rowData ?? [], "AgGrid Data");
   //   addStyle()
   // }
-
-
 
   // const handleOpenBtnsExportsModel = () => {
   //   setOpenBtnsExportsModel(true);
@@ -87,13 +80,11 @@ const AgGridDT = ({
   useEffect(() => {
     if (gridApi) {
       const dataSource = {
-        getRows: (params) => params.successCallback(rowData, rowData.length)
-      }
+        getRows: (params) => params.successCallback(rowData, rowData.length),
+      };
       gridApi.setDatasource(dataSource);
     }
-  }, [gridApi, rowData])
-
-  
+  }, [gridApi, rowData]);
 
   return (
     <div
@@ -138,7 +129,6 @@ const AgGridDT = ({
         getRowClass={getRowClass || ""}
         ref={ref}
       />
-      
     </div>
   );
 };

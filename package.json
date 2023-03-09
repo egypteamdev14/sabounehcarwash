@@ -33,7 +33,8 @@
         "react-query": "^3.39.3",
         "react-redux": "^8.0.5",
         "react-toastify": "^9.1.1",
-        "reactjs-social-login": "^2.6.2"
+        "reactjs-social-login": "^2.6.2",
+        "recharts": "^2.4.3"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.13",

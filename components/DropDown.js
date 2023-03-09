@@ -7,7 +7,7 @@ function DropDown() {
     <Dropdown className='drop'>
      <div className='flex align-items-center'>
      <FiUsers className='icon' /> 
-      <Dropdown.Toggle className='drop-down' style={{backgroundColor: "transparent", border: "none", display: "flex", alignItems: "center" ,gap: "22px"}}  id="dropdown-basic">
+      <Dropdown.Toggle className='drop-down' style={{backgroundColor: "#CDEEFE", border: "none", display: "flex", alignItems: "center" ,gap: "22px",color:"#006FA3",fontSize:"21px"}}  id="dropdown-basic">
 			 Users
       </Dropdown.Toggle>
      </div>

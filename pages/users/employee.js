@@ -13,8 +13,9 @@ import UpdateEmployee from '@/components/Users/Employee/UpdateEmployee'
 import { MdOutlineDelete } from 'react-icons/md'
 
 const Employee = () => {
+  const [gridApi, setGridApi] = useState(null);
 
-	const [gridApi, setGridApi] = useState(null)
+	
 
 	const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
 
@@ -62,69 +63,66 @@ const Employee = () => {
 		]
 
   //  default Column Definition
-	const defaultColDef = {
-			sortable: true,
-			flex: 1,
-			filter: true,
-			floatingFilter: true
-		}
-	//  init 
-	const onGridReady = (params) => {
-    setGridApi(params)
-  }
-  	// Export Excel 
-	const onBtExport =  useCallback(() => {
+  const defaultColDef = {
+    sortable: true,
+    flex: 1,
+    filter: true,
+    floatingFilter: true,
+  };
+  //  init
+  const onGridReady = (params) => {
+    setGridApi(params);
+  };
+  // Export Excel
+  const onBtExport = useCallback(() => {
     gridApi?.api.exportDataAsCsv();
-  },[gridApi?.api]) 
-  
+  }, [gridApi?.api]);
+
   // Row Style
-	const getRowStyle = (params) => {
+  const getRowStyle = (params) => {
     if (params?.data._id % 2) {
       return {
-        backgroundColor: "#FFE7D9",
+        backgroundColor: "#fff",
         color: "#7A0C2E",
       };
     } else {
       return {
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#fff",
         color: "#001C29",
       };
     }
-  }
+  };
 
-	return (
-		<section className='employee'>
+  return (
+    <section className="employee">
+      <div className="d-flex justify-content-between align-items-center m-3">
+        <h2>Employee List </h2>
+        <AddEmployee />
+      </div>
 
-			<div className='d-flex justify-content-between align-items-center m-3' >
-				<h2>Employee List </h2>
-				<AddEmployee/>
-			</div>
+      <Button
+        onClick={onBtExport}
+        bg={"#05A8F5"}
+        color={"#ffffff"}
+        width={"130px"}
+        height={"35px"}
+        radius={"8px"}
+        fontSize={"1rem"}
+        cl={"mt-2 mb-3"}
+      >
+        Export to Excel
+      </Button>
 
-			<Button
-			 onClick={onBtExport}
-			 bg={"#05A8F5"}
-			 color={"#ffffff"}
-			 width={"130px"}
-			 height={"35px"}
-			 radius={"8px"}
-			 fontSize={"1rem"}
-			 cl={"mt-2 mb-3"}
-			 >
-			 Export to Excel
-			</Button>
-
-
-			<AgGridDT 
-			 
-			 columnDefs={columnDefs}
-			 rowData={employee}
-			 defaultColDef={defaultColDef}  
-			 onGridReady={onGridReady}
-			 getRowStyle={getRowStyle}
-			/>
-		</section>
-	)
-}
+      <AgGridDT
+        columnDefs={columnDefs}
+        rowData={employee}
+        defaultColDef={defaultColDef}
+        onGridReady={onGridReady}
+        getRowStyle={getRowStyle}
+      />
+    </section>
+  );
+};
 
 export default Employee;
 

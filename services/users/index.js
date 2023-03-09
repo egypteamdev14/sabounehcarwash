@@ -80,7 +80,6 @@ export const updateUser = async (id, data) => {
 	return response.data;
 };
 
-
 // delete user 
 export const deleteUser = async (deleteSelected) => {
 	const response = await axios({

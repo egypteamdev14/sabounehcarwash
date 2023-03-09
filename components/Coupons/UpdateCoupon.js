@@ -100,7 +100,6 @@ const UpdateCoupon = ({updateCaponInfo}) => {
 							</Form.Text>
 						</Form.Group>
 
-						
 
 						<div className='d-flex align-items-center justify-content-center'>
 							<Button
@@ -118,15 +117,7 @@ const UpdateCoupon = ({updateCaponInfo}) => {
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button
-						bg={"#6c757d"}
-						color={"#fff"}
-						width={"70px"}
-						height={"30px"}
-						radius={"5px"}
-						onClick={handleClose}>
-						Close
-					</Button>
+					
 
 				</Modal.Footer>
 			</Modal>

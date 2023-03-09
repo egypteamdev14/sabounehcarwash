@@ -6,7 +6,7 @@ import SideBar from './SideBar';
 
 const MainLayout = ({ children }) => {
 
-	const [toggle, setToggle] = useState(false)
+	const [toggle, setToggle] = useState(true)
 
 	return (
 		<>

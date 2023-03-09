@@ -5,20 +5,26 @@ import { useSession } from 'next-auth/react'
 import React, { useCallback, useState } from 'react'
 import { useQuery } from 'react-query';
 import AgGridDT from '@/components/AgGridDT'
-import { toast } from 'react-toastify'
-import AddNewCustomer from '@/components/Users/Customer/AddNewCustomer'
-import UpdateCustomer from '@/components/Users/Customer/UpdateCustomer'
+// // import { toast } from 'react-toastify'
+// import AddNewCustomer from '@/components/Users/Customer/AddNewCustomer'
+// import UpdateCustomer from '@/components/Users/Customer/UpdateCustomer'
 import { MdOutlineDelete } from 'react-icons/md'
 
+// import { AgGridReact } from "ag-grid-react";
+import AgGridDT from "@/components/AgGridDT";
+import { toast } from "react-toastify";
+import AddNewCustomer from "@/components/Users/Customer/AddNewCustomer";
+import UpdateCustomer from "@/components/Users/Customer/UpdateCustomer";
 
 const Customers = () => {
 	const [gridApi, setGridApi] = useState(null)
 	const { data: session, status } = useSession();
 
+  const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
 
-	const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
+  const users = data?.users.filter((user) => user.role === "user");
 
-	const users = data?.users?.filter((user) => user.role === 'user');
+	
 
 
 
@@ -90,7 +96,6 @@ const Customers = () => {
 			};
 		}
 	}
-
 	// delete user
 	const handleDelete = async (id) => {
 		try {
@@ -108,16 +113,16 @@ const Customers = () => {
 
 
 
-	return (
-		<section className='customers'>
+  
 
-			<div className='d-flex justify-content-between align-items-center m-3' >
+  return (
+    <section className="customers">
+      <div className="d-flex justify-content-between align-items-center m-3">
+        <h2>Customer List </h2>
+        <AddNewCustomer />
+      </div>
 
-				<h2>Customer List </h2>
-				<AddNewCustomer />
-
-
-			</div>
+		
 
 			<Button
 				onClick={onBtExport}
@@ -131,10 +136,7 @@ const Customers = () => {
 			>
 				Export to Excel
 			</Button>
-
-
 			<AgGridDT
-
 				columnDefs={columnDefs}
 				rowData={users}
 				defaultColDef={defaultColDef}
@@ -145,4 +147,4 @@ const Customers = () => {
 	)
 }
 
-export default Customers
+export default Customers;
