@@ -19,7 +19,7 @@ const ServiceProvider = () => {
 
 	const { data, error, isLoading } = useQuery("getUsers", getAllWasher);
 
-	console.log(data.washer)
+	console.log(data?.washer)
 
 	// columns definition
 	const columnDefs = [

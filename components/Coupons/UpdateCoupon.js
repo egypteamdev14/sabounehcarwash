@@ -76,7 +76,7 @@ const UpdateCoupon = ({updateCaponInfo}) => {
 						{/* Mobile Number */}
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label> Expire Date </Form.Label>
-							<Form.Control type="date" placeholder="Enter Expire Date" name='expireDate' required onChange={(e) => handelChange(e)} value={expireDate} />
+							<Form.Control type="date" placeholder="Enter Expire Date" name='expireDate' min="2023-01-01" required onChange={(e) => handelChange(e)} value={expireDate} />
 							<Form.Text className="text-muted">
 								we will never share your info
 							</Form.Text>
