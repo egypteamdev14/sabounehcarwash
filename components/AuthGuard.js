@@ -5,16 +5,20 @@ import Router, { useRouter } from "next/router";
 import MainLayout from "../layout/MainLayout";
 import { useDispatch } from "react-redux";
 
+
+
 import { getUser } from "@/store/slices/getuser";
 import SignIn from "@/pages/signin";
 import { Loader } from "./Loader";
+
 import axios from "axios";
-// import config from "@/config/config";
+
+
 
 const AuthGuard = ({ children }) => {
-  const { data: session, status: loading } = useSession();
+	const { data: session, status: loading } = useSession();
 
-  console.log(session?.user?.token.token);
+	console.log(session?.user?.token.token)
 
   const hasUser = !!session?.user;
 
@@ -27,13 +31,13 @@ const AuthGuard = ({ children }) => {
       delete axios.defaults.headers.common.Authorization;
     }
 
-    // if(session?)
-    else {
-      dispatch(getUser(session?.user.user));
-      axios.defaults.baseURL = "http://192.168.0.108:3030";
-    }
-	axios.defaults.headers.common.Authorization = `Bearer ${session?.user.token.token}`;
-  }, [loading, hasUser, dispatch, session]);
+		// if(session?)
+		return () => {
+			dispatch(getUser(session?.user.user));
+			axios.defaults.headers.common.Authorization = `Bearer ${session?.user.token.token}`;
+			axios.defaults.baseURL = "http://192.168.0.108:3030";
+		};
+	}, [loading, hasUser, dispatch, session]);
 
   if (loading === "loading" && router.pathname !== "/signin") {
     return <Loader />;

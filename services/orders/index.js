@@ -10,7 +10,6 @@ export const getAllOrders = async () => {
 };
 
 // get order by id 
-
 export const getOrderById = async (id) => {
 	const response = await axios({
 		method: "get",

@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Button from '@/components/Button';
 import UpdateUserPopUp from '@/components/Users/UpdateUserPopUp';
+import AddVehicle from '@/components/Vehicles/AddVehicle';
+import UpdateVehicle from '@/components/Vehicles/UpdateVehicle';
 import { deleteVehicle, getAllVehicles } from '@/services/vehicles';
 import React from 'react'
 import { Table } from 'react-bootstrap'
@@ -28,7 +30,11 @@ const Vehicles = () => {
 	return (
 		<main className='vehicles'>
 			<section>
-				<h2>Show All Vehicles</h2>
+				<div className='d-flex justify-content-between align-items-center m-3' >
+					<h2>Show All Vehicles</h2>
+					<AddVehicle />
+				</div>
+
 				<Table striped bordered hover>
 					<thead>
 						<tr>
@@ -42,34 +48,34 @@ const Vehicles = () => {
 							<th>Update</th>
 						</tr>
 					</thead>
-					<tbody> 
-						{data?.length === 0 ? <tr className='fs-3 p-4'>NO DATA TO SHOW</tr> : null}
-						{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-						{error !== null ? <tr className='fs-3 p-4'> Something went wrong </tr>: null}
-					{data?.vehicle?.map((user) => (
+					<tbody>
+						{data?.vehicle?.length === 0 ? <tr className='fs-3 p-4'>NO DATA TO SHOW</tr> : data?.vehicle?.map((user) => (
 
-						<tr key={user._id}>
-							<td>{user._id.slice(0, 8)}</td>
-							<td>{user.description}</td>
-							<td>{user.title}</td>
-							<td>{user.exteriorPrice}</td>
-							<td>{user.exteriorAndInteriorPrice}</td>
-							<td><img src={user.image} alt="car" width={60} height={60}/></td>
-							<td>
-								<Button
-									bg={"#05A8F5"}
-									color={"#ffffff"}
-									width={"130px"}
-									height={"35px"}
-									radius={"8px"}
-									fontSize={"1rem"}
-									onClick={() => handleDelete(user._id)}
-								>Delete</Button> </td>
-							<td>
-								<UpdateUserPopUp id={user._id} />
-							</td>
-						</tr>
-					))}
+							<tr key={user._id}>
+								<td>{user._id.slice(0, 8)}</td>
+								<td>{user.description}</td>
+								<td>{user.title}</td>
+								<td>{user.exteriorPrice}</td>
+								<td>{user.exteriorAndInteriorPrice}</td>
+								<td><img src={user.image} alt="car" width={60} height={60} /></td>
+								<td>
+									<Button
+										bg={"#05A8F5"}
+										color={"#ffffff"}
+										width={"130px"}
+										height={"35px"}
+										radius={"8px"}
+										fontSize={"1rem"}
+										onClick={() => handleDelete(user._id)}
+									>Delete</Button> </td>
+								<td>
+									<UpdateVehicle id={user._id} vehicleData={user} />
+								</td>
+							</tr>
+						))}
+						{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
+						{/* {error !== null ? <tr className='fs-3 p-4'> Something went wrong </tr> : null} */}
+
 
 					</tbody>
 				</Table>

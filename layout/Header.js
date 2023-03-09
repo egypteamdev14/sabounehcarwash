@@ -27,8 +27,8 @@ const Header = ({ setToggle }) => {
 			</div>
 			<div className='userInfo'>
 				<div className='info-header-text'>
-					<h5>{session ? session?.user.token.user.fullName : 'Ahmed'}</h5>
-					<p>{session ? session?.user.token.user.role : ''}</p>
+					<h5 style={{textTransform: "capitalize"}}>{session ? session?.user.token.user.fullName : 'Ahmed'}</h5>
+					{/* <p>{session ? session?.user.token.user.role : ''}</p> */}
 				</div>
 				<div className='info-header-image' onClick={() => setLogOut((prev) => !prev)}>
 					<img src={session?.user?.image || '/user.png'} alt='user' width={40} height={40} />

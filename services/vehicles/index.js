@@ -34,7 +34,7 @@ export const updateVehicle = async (id, data) => {
 		method: "put",
 		data: data,
 		headers: {
-			"Content-Type": "application/json"
+			"Content-Type": "multipart/form-data"
 		}
 	});
 
