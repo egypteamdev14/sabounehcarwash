@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 
 import Button from "../components/Button"
-import { signIn, useSession } from 'next-auth/react';
-import axios from 'axios';
+import { signIn } from 'next-auth/react';
+// import axios from 'axios';
 import { useRouter } from 'next/router';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 
@@ -27,7 +27,7 @@ const SignIn = () => {
 	const [emailError, setEmailError] = useState('')
 	const [passwordError, setPasswordError] = useState('')
 
-	const { data: session, status } = useSession();
+	// const { data: session, status } = useSession();
 
 	const showPassword = () => setShow((prev) => !prev)
 
@@ -80,7 +80,7 @@ const SignIn = () => {
 			<div className="form">
 				<form onSubmit={login}>
 					<div className="email">
-						<label htmlFor="text" >رقم الهاتف</label>
+						<label htmlFor="text" >Mobile Number</label>
 						<input
 							type="text"
 							name="username"
@@ -93,7 +93,7 @@ const SignIn = () => {
 						{emailError && <p className="error-message">{emailError}</p>}
 					</div>
 					<div className="password">
-						<label htmlFor="password" >كلمة المرور</label>
+						<label htmlFor="password" >Password</label>
 						<input
 							type={show ? "text" : "password"}
 							name="password"
@@ -108,8 +108,8 @@ const SignIn = () => {
 						{passwordError && <p className="error-message">{passwordError}</p>}
 					</div>
 
-					<div className="remember">
-						<p>نسيت كلمة المرور ؟</p>
+					{/* <div className="remember">
+						<p>Remember Me</p>
 						<div>
 							<input
 								type="checkbox"
@@ -118,10 +118,10 @@ const SignIn = () => {
 								value="remember me"
 
 							/>
-							<label htmlFor="remember"> تذكرنى</label>
+							<label htmlFor="remember">Remember</label>
 						</div>
 
-					</div>
+					</div> */}
 
 					<div className="login-btn">
 						<Button
@@ -134,7 +134,7 @@ const SignIn = () => {
 							fontWeight={"bold"}
 
 						>
-							تسجيل الدخول
+							 Log In
 						</Button>
 					</div>
 				</form>

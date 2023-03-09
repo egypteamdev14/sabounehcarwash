@@ -1,152 +1,122 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useMemo, useRef, useState } from "react";
-import Button from "@/components/Button";
-import AddUserPopUp from "@/components/Users/Employee/UpdateEmployee";
-import UpdateUserPopUp from "@/components/Users/UpdateUserPopUp";
-import { deleteUser, fetchAllUsers } from "@/services/users";
-import { getAllOrders } from "@/services/orders";
-import { useSession } from "next-auth/react";
-import { Table } from "react-bootstrap";
-import { useQuery } from "react-query";
-import { toast } from "react-toastify";
-import AddEmployee from "@/components/Users/Employee/AddEmployee";
-import AgGridDT from "@/components/AgGridDT";
-import { AgGridReact } from "ag-grid-react";
-import UpdateEmployee from "@/components/Users/Employee/UpdateEmployee";
+import AgGridDT from '@/components/AgGridDT';
+import Button from '@/components/Button';
+import { getAllOrders } from '@/services/orders';
+
+import React, { useState } from 'react'
+
+import { useQuery } from 'react-query';
+
 
 const Orders = () => {
-  const [gridApi, setGridApi] = useState(null);
 
-  const { data, error, isLoading } = useQuery("getOrders", getAllOrders);
-  const handleDelete = async (id) => {
-    console.log(id);
-    try {
-      await deleteUser(id);
+	const [gridApi, setGridApi] = useState(null)
 
-      const filterData = employee?.filter((user) => user._id !== id);
-      setUsers(filterData);
-      toast.success("User deleted successful");
-    } catch (error) {
-      console.log(error.message);
-      toast.error(error.message);
-    }
-  };
 
-  // columns definition
-  const columnDefs = [
-    { headerName: "ID", field: "_id", maxWidth: 150 },
-    { headerName: "Full Name", field: "user.fullName", maxWidth: 150 },
 
-    {
-      headerName: "Creation of account date",
-      field: "createdAt",
-      maxWidth: 300,
-    },
-    { headerName: "Last login date", field: "lastLogin" },
-    { headerName: "Order Id", field: "orderId", maxWidth: 170 },
-    { headerName: "Date", field: "date" },
-    { headerName: "Payement Method", field: "paymentMethod" },
-    { headerName: "Status", field: "status" },
-    {
-      headerName: "Actions",
-      field: "id",
-      minWidth: 400,
-      sortable: false,
-      filter: false,
-      floatingFilter: false,
-      cellRendererFramework: (params) => (
-        <div>
-          <UpdateEmployee updateUserInfo={params?.data} />
-          <Button
-            style={{ marginLeft: "20px" }}
-            bg={"#05A8F5"}
-            color={"#ffffff"}
-            width={"130px"}
-            height={"35px"}
-            radius={"8px"}
-            fontSize={"1rem"}
-            onClick={() => handleDelete(params?.data?._id)}
-          >
-            Delete
-          </Button>
-        </div>
-      ),
-    },
-  ];
+	const { data, error, isLoading } = useQuery("getOrders", getAllOrders);
 
-  //  default Column Definition
-  const defaultColDef = {
-    sortable: true,
-    flex: 1,
-    filter: true,
-    floatingFilter: true,
-  };
-  //  init
-  const onGridReady = (params) => {
-    setGridApi(params);
-  };
-  // Export Excel
-  const onBtExport = useCallback(() => {
-    gridApi?.api.exportDataAsCsv();
-  }, [gridApi?.api]);
 
-  // Row Style
-  const getRowStyle = (params) => {
-    if (params?.data._id % 2) {
-      return {
-        backgroundColor: "#FFE7D9",
-        color: "#7A0C2E",
-      };
-    } else {
-      return {
-        backgroundColor: "#DFDFDF",
-        color: "#001C29",
-      };
-    }
-  };
 
-  return (
-    <section className="employee">
-      <div className="d-flex justify-content-between align-items-center m-3">
-        <h2>Orders List </h2>
-        <AddEmployee />
-      </div>
+	// columns definition
+	const columnDefs = [
 
-      <Button
-        onClick={onBtExport}
-        bg={"#05A8F5"}
-        color={"#ffffff"}
-        width={"130px"}
-        height={"35px"}
-        radius={"8px"}
-        fontSize={"1rem"}
-        cl={"mt-2 mb-3"}
-      >
-        Export to Excel
-      </Button>
+		{ headerName: "ID", field: "_id", maxWidth: 100 },
+		{ headerName: "Created date", field: "createdAt", maxWidth: 150 },
+		// { headerName: "Start Wash date", field: "phoneNumber", maxWidth: 150 },
 
-      <AgGridDT
-        columnDefs={columnDefs}
-        rowData={data?.orders}
-        defaultColDef={defaultColDef}
-        onGridReady={onGridReady}
-        getRowStyle={getRowStyle}
-      />
-    </section>
-  );
-};
+		{ headerName: "Order State", field: "status", maxWidth: 300 },
+		{ headerName: "Customer Name", field: "user.fullName" },
+		{ headerName: "Washer Name", field: "sysProvider.fullName", maxWidth: 170 },
+		{ headerName: "Service type ", field: "washType" },
+		{ headerName: "Vehicle type ", field: "vehicleId.title" },
+		{ headerName: "Payment Method ", field: "paymentMethod" },
+		
+	]
 
-export default Orders;
 
-{
-  /* <AgGridReact 
-			  rowData={employee}
-				columnDefs={columnDefs}
-				defaultColDef={defaultColDef}
-				onGridReady={onGridReady}
-			  rowHeight={"auto"}
+	const defaultColDef = {
+		sortable: true,
+		flex: 1,
+		filter: true,
+		floatingFilter: true
+	}
 
-			/> */
+	//  init 
+	const onGridReady = (params) => {
+		setGridApi(params)
+	}
+
+	// Export Excel 
+	const onBtExport = () => {
+		gridApi?.api.exportDataAsCsv();
+	}
+
+	// Row Style
+	const getRowStyle = (params) => {
+		if (params.data._id % 2) {
+			return {
+				backgroundColor: "#FFE7D9",
+				color: "#7A0C2E",
+			};
+		} else {
+			return {
+				backgroundColor: "#e0e0e0",
+				color: "#001C29",
+			};
+		}
+	}
+
+	// delete 
+	// const handleDelete = async (id) => {
+	// 	try {
+	// 		await deleteUser(id);
+
+	// 		const filterData = users?.filter((user) => user._id !== id);
+	// 		// setUsers(filterData);
+	// 		toast.success("User deleted successful")
+	// 	} catch (error) {
+	// 		console.log(error.message);
+	// 		toast.error(error.message);
+	// 	}
+	// }
+
+	return (
+		<section className='orders'>
+			
+				<div className='d-flex justify-content-between align-items-center m-3' >
+
+					<h2> Order list </h2>
+					
+
+
+				</div>
+
+				<Button
+					onClick={onBtExport}
+					bg={"#05A8F5"}
+					color={"#ffffff"}
+					width={"130px"}
+					height={"35px"}
+					radius={"8px"}
+					fontSize={"1rem"}
+					cl={"mt-2 mb-3"}
+				>
+					Export to Excel
+				</Button>
+
+
+
+				<AgGridDT
+
+					columnDefs={columnDefs}
+					rowData={data?.orders}
+					defaultColDef={defaultColDef}
+					onGridReady={onGridReady}
+					getRowStyle={getRowStyle}
+				/>
+		
+		</section>
+	)
 }
 
 {

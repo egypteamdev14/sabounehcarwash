@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-// fetch All user (main page)
+// fetch All user 
 export const fetchAllUsers = async () => {
 	const response = await axios({
 		method: "get",
@@ -18,6 +18,19 @@ export const addUser = async (data) => {
 		method: "post",
 		url: "/api/users/dashboard",
 		data: JSON.stringify(data),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	return response.data;
+};
+
+// add new user(add driver)
+export const getAllWasher = async () => {
+	const response = await axios({
+		method: "get",
+		url: "/api/washers/getAllWasher",
+		
 		headers: {
 			"Content-Type": "application/json",
 		},

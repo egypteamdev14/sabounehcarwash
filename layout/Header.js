@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Button from '@/components/Button';
 import { signOut, useSession } from 'next-auth/react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -21,8 +21,9 @@ const Header = ({ setToggle }) => {
 
 	return (
 		<div className='header relative'>
-			<div role="button" tabIndex="0" className='toggle-box' onClick={() => setToggle((prev) => !prev)}>
-				<AiOutlineMenu color={'#000'} />
+			<div role="button" tabIndex="0" className='toggle-box' >
+				<AiOutlineMenu color={'#000'} onClick={() => setToggle((prev) => !prev)}/>
+				<h2>Dashboard</h2>
 			</div>
 			<div className='userInfo'>
 				<div className='info-header-text'>

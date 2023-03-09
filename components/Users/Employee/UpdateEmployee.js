@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 
-import Modal from "react-bootstrap/Modal";
-import Button from "../../Button";
-import { addUser, updateUser } from "@/services/users";
-import { toast } from "react-toastify";
+import Modal from 'react-bootstrap/Modal';
+import Button from '../../Button';
+import { updateUser } from '@/services/users';
+import { toast } from 'react-toastify';
 
 function UpdateEmployee({ updateUserInfo }) {
   const [show, setShow] = useState(false);

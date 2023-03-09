@@ -15,7 +15,14 @@
     }
 
     .toggle-box {
+        display: flex;
+        align-items: center;
+        gap: 20px;
         cursor: pointer;
+
+        h2 {
+            color: #06152B;
+        }
     }
 
     .userInfo {

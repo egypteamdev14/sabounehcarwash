@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 
-import Modal from "react-bootstrap/Modal";
-import Button from "../../Button";
-import { updateWasher } from "@/services/users";
-import { toast } from "react-toastify";
+import Modal from 'react-bootstrap/Modal';
+import Button from '../../Button';
+import { addNewWasher, addUser, updateUser, updateWasher } from '@/services/users';
+import { toast } from 'react-toastify';
 
 function UpdateWasher({ updateWasherData }) {
   const [showw, setShow] = useState(false);
@@ -50,10 +50,10 @@ function UpdateWasher({ updateWasherData }) {
     setFormData({ ...formData, [name]: value });
   };
 
-  // handle image change
-  const handelFileChange = (e) => {
-    setImageFile(e.target.files[0]);
-  };
+	// handle image change
+	const handelFileChange = (e)=> {
+    setImageFile(e.target.files[0])
+	}
 
   // handel Update Washer
   const handelAdd = async (e) => {
@@ -83,19 +83,18 @@ function UpdateWasher({ updateWasherData }) {
     }
   };
 
-  return (
-    <>
-      <Button
-        bg={"#05A8F5"}
-        color={"#ffffff"}
-        width={"170px"}
-        height={"35px"}
-        radius={"8px"}
-        fontSize={"1rem"}
-        onClick={handleShow}
-      >
-        Update Washer{" "}
-      </Button>
+	return (
+		<>
+
+			<Button
+				bg={"#05A8F5"}
+				color={"#ffffff"}
+				width={"170px"}
+				height={"35px"}
+				radius={"8px"}
+				fontSize={"1rem"}
+				onClick={handleShow}
+			>Update Washer </Button>
 
       <Modal centered show={showw} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
@@ -165,62 +164,43 @@ function UpdateWasher({ updateWasherData }) {
               </Form.Group>
             </div>
 
-            <div className="flex align-items-center gap-5">
-              <div className="w-[36%]">
-                {/* Choose Image */}
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Chose Image</Form.Label>
-                  <Form.Control
-                    type="file"
-                    placeholder="chose Image"
-                    name="image"
-                    required
-                    onChange={handelFileChange}
-                  />
-                </Form.Group>
-              </div>
-              {/* Id Number */}
-              <div className="w-[36%]">
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>ID Number</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter id Number"
-                    name="IDNumber"
-                    required
-                    onChange={(e) => handelChange(e)}
-                    value={IDNumber}
-                  />
-                </Form.Group>
-              </div>
-            </div>
-            {/* Vehicle Type */}
-            <h6>Vehicle Type</h6>
-            <Form.Select
-              className="mb-3 mt-3"
-              aria-label="Default select example"
-              name="vehicleType"
-              required
-              onChange={(e) => handelChange(e)}
-            >
-              <option>Vehicle Type</option>
-              <option value="car">Car</option>
-              <option value="motorcycle">Motorcycle</option>
-            </Form.Select>
-            {/* Type of Subscription */}
-            <h6>Type of Subscription</h6>
-            <Form.Select
-              className="mb-3"
-              aria-label="Default select example"
-              name="TypeofSubscription"
-              required
-              onChange={(e) => handelChange(e)}
-            >
-              <option>Type of Subscription</option>
-              <option value="Full-Car Wash">Full-Car Wash</option>
-              <option value="plus">plus</option>
-              <option value="Lite">Lite</option>
-            </Form.Select>
+						<div className='flex align-items-center gap-5'>
+
+							<div className='w-[36%]'>
+								{/* Choose Image */}
+								<Form.Group className="mb-3" controlId="formBasicEmail">
+									<Form.Label>Chose Image</Form.Label>
+									<Form.Control type="file" placeholder="chose Image" name='image' required onChange={handelFileChange} />
+
+								</Form.Group>
+
+							</div>
+							{/* Id Number */}
+							<div className='w-[36%]'>
+								<Form.Group className="mb-3" controlId="formBasicEmail">
+									<Form.Label>ID Number</Form.Label>
+									<Form.Control type="text" placeholder="Enter id Number" name='IDNumber' required onChange={(e) => handelChange(e)} value={IDNumber} />
+
+								</Form.Group>
+							</div>
+						</div>
+						{/* Vehicle Type */}
+						<h6>Vehicle Type</h6>
+						<Form.Select className="mb-3 mt-3" aria-label="Default select example" name='vehicleType' required onChange={(e) => handelChange(e)} >
+							<option>Vehicle Type</option>
+							<option value="car">Car</option>
+							<option value="motorcycle">Motorcycle</option>
+
+						</Form.Select>
+						{/* Type of Subscription */}
+						<h6>Type of Subscription</h6>
+						<Form.Select className="mb-3" aria-label="Default select example" name='TypeofSubscription' required onChange={(e) => handelChange(e)} >
+							<option>Type of Subscription</option>
+							<option value="Full-Car Wash">Full-Car Wash</option>
+							<option value="plus">plus</option>
+							<option value="Lite">Lite</option>
+
+						</Form.Select>
 
             {/* Type of Subscription */}
             <h6>Activation period</h6>
