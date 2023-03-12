@@ -1,66 +1,117 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useMemo, useRef, useState } from 'react'
-import Button from '@/components/Button'
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import Button from "@/components/Button";
 
-import { deleteUser, fetchAllUsers } from '@/services/users'
+import { deleteUser, fetchAllUsers } from "@/services/users";
 
-import { useQuery } from 'react-query'
-import { toast } from 'react-toastify'
-import AddEmployee from '@/components/Users/Employee/AddEmployee'
-import AgGridDT from '@/components/AgGridDT'
+import { useQuery } from "react-query";
+import { toast } from "react-toastify";
+import AddEmployee from "@/components/Users/Employee/AddEmployee";
+import AgGridDT from "@/components/AgGridDT";
 
-import UpdateEmployee from '@/components/Users/Employee/UpdateEmployee'
-import { MdOutlineDelete } from 'react-icons/md'
+import UpdateEmployee from "@/components/Users/Employee/UpdateEmployee";
+import { MdOutlineDelete } from "react-icons/md";
+import DeleteModal from "@/components/DeleteModal";
 
 const Employee = () => {
   const [gridApi, setGridApi] = useState(null);
 
-	
+  const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
 
-	const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
+  const employee = data?.users?.filter((user) => user.role === "employee");
 
-	const employee = data?.users?.filter((user)=> user.role === 'employee');
-
-	const handleDelete = async (id) => {
-		console.log(id)
-		try {
-			await deleteUser(id);
-
-			const filterData = employee?.filter((user) => user._id !== id);
-			setUsers(filterData);
-			toast.success("User deleted successful")
-		} catch (error) {
-			console.log(error.message);
-			toast.error(error.message);
-		}
-	}
+  const handleDelete = async (id) => {
+    console.log(id);
+    try {
+      await deleteUser(id);
+      const filterData = employee?.filter((user) => user._id !== id);
+      setUsers(filterData);
+      toast.success("User deleted successful");
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
 
   // columns definition
-	const columnDefs = 
-		[
-    
-			{ headerName: "ID", field: "_id", maxWidth: 150 },
-			{ headerName: "Full Name", field: "fullName", maxWidth: 150 },
-			{ headerName: "Phone Number", field: "phoneNumber", maxWidth: 150},
-			
-			{ headerName: "Creation of account date", field: "createdAt" , maxWidth: 300},
-			{ headerName: "Last login date", field: "lastLogin" },
-			{ headerName: "Employee state", field: "status", maxWidth: 170 },
-			{ headerName: "Privilege", field: "permissions" },
-			{
-				headerName: "Actions",
-				field: "id",
-				minWidth: 400,
-				sortable: false,
-				filter: false,
-				floatingFilter: false , cellRendererFramework: (params) => <div className='flex gap-4'>
-					<UpdateEmployee updateUserInfo={params?.data}  />
-					
-          <MdOutlineDelete style={{color: "#05A8F5", cursor: "pointer"}} fontSize={30} onClick={() => handleDelete(user._id)}/>
+  const columnDefs = [
+    {
+      headerName: "ID",
+      field: "_id",
+      maxWidth: 150,
+      filterParams: {
+        filterOptions: ["startsWith", "contains"],
+        defaultOption: "startsWith",
+      },
+    },
+    {
+      headerName: "Full Name",
+      field: "fullName",
+      maxWidth: 150,
+      filterParams: {
+        filterOptions: ["startsWith", "contains"],
+        defaultOption: "startsWith",
+      },
+    },
+    {
+      headerName: "Phone Number",
+      field: "phoneNumber",
+      maxWidth: 150,
+      filterParams: {
+        filterOptions: ["startsWith", "contains"],
+        defaultOption: "startsWith",
+      },
+    },
 
-				</div>
-			}
-		]
+    {
+      headerName: "Creation of account date",
+      field: "createdAt",
+      maxWidth: 300,
+      filterParams: {
+        filterOptions: ["startsWith", "contains"],
+        defaultOption: "startsWith",
+      },
+    },
+    {
+      headerName: "Last login date",
+      field: "lastLogin",
+      filterParams: {
+        filterOptions: ["startsWith", "contains"],
+        defaultOption: "startsWith",
+      },
+    },
+    {
+      headerName: "Employee state",
+      field: "status",
+      maxWidth: 170,
+      filterParams: {
+        filterOptions: ["startsWith", "contains"],
+        defaultOption: "startsWith",
+      },
+    },
+    {
+      headerName: "Privilege",
+      field: "permissions",
+      filterParams: {
+        filterOptions: ["startsWith", "contains"],
+        defaultOption: "startsWith",
+      },
+    },
+    {
+      headerName: "Actions",
+      field: "id",
+      minWidth: 400,
+      sortable: false,
+      filter: false,
+      floatingFilter: false,
+      cellRendererFramework: (params) => (
+        <div className="flex gap-4">
+          <UpdateEmployee updateUserInfo={params?.data} />
+          <DeleteModal id={params?.data?._id} />
+        </div>
+      ),
+    },
+  ];
 
   //  default Column Definition
   const defaultColDef = {
@@ -125,4 +176,3 @@ const Employee = () => {
 };
 
 export default Employee;
-

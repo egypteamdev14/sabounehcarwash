@@ -17,8 +17,6 @@ export const getOrderById = async (id) => {
 	});
 	return response.data;
 };
-
-
 // Delete Order
 export const deleteOrder = async (id) => {
 	const response = await axios({
