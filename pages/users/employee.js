@@ -11,11 +11,12 @@ import AgGridDT from "@/components/AgGridDT";
 
 import UpdateEmployee from "@/components/Users/Employee/UpdateEmployee";
 import { MdOutlineDelete } from "react-icons/md";
+import DeleteModal from "@/components/DeleteModal";
 
 const Employee = () => {
     const [gridApi, setGridApi] = useState(null);
 
-    const { data, error, isLoading } = useQuery("getEmployee", fetchAllUsers);
+    const { data, error, isLoading } = useQuery("getUsers", fetchAllUsers);
 
     const employee = data?.users?.filter((user) => user.role === "employee");
 
@@ -23,7 +24,6 @@ const Employee = () => {
         console.log(id);
         try {
             await deleteUser(id);
-
             const filterData = employee?.filter((user) => user._id !== id);
             setUsers(filterData);
             toast.success("User deleted successful");
@@ -35,30 +35,67 @@ const Employee = () => {
 
     // columns definition
     const columnDefs = [
-        { headerName: "ID", field: "_id", maxWidth: 150 },
-        { headerName: "Full Name", field: "fullName", maxWidth: 150 },
-        { headerName: "Phone Number", field: "phoneNumber", maxWidth: 150 },
+        {
+            headerName: "ID",
+            field: "_id",
+            maxWidth: 150,
+            filterParams: {
+                filterOptions: ["startsWith", "contains"],
+                defaultOption: "startsWith",
+            },
+        },
+        {
+            headerName: "Full Name",
+            field: "fullName",
+            maxWidth: 150,
+            filterParams: {
+                filterOptions: ["startsWith", "contains"],
+                defaultOption: "startsWith",
+            },
+        },
+        {
+            headerName: "Phone Number",
+            field: "phoneNumber",
+            maxWidth: 150,
+            filterParams: {
+                filterOptions: ["startsWith", "contains"],
+                defaultOption: "startsWith",
+            },
+        },
 
         {
             headerName: "Creation of account date",
             field: "createdAt",
             maxWidth: 300,
+            filterParams: {
+                filterOptions: ["startsWith", "contains"],
+                defaultOption: "startsWith",
+            },
         },
-        { headerName: "Last login date", field: "lastLogin" },
+        {
+            headerName: "Last login date",
+            field: "lastLogin",
+            filterParams: {
+                filterOptions: ["startsWith", "contains"],
+                defaultOption: "startsWith",
+            },
+        },
         {
             headerName: "Employee state",
-            // field: "status",
+            field: "status",
             maxWidth: 170,
-            valueGetter: (params) =>
-                params.data.status ? params.data.status : "Not Add Yet",
+            filterParams: {
+                filterOptions: ["startsWith", "contains"],
+                defaultOption: "startsWith",
+            },
         },
         {
             headerName: "Privilege",
             field: "permissions",
-            valueGetter: (params) =>
-                params.data.permissions
-                    ? params.data.permissions
-                    : "Not Add Yet",
+            filterParams: {
+                filterOptions: ["startsWith", "contains"],
+                defaultOption: "startsWith",
+            },
         },
         {
             headerName: "Actions",
@@ -70,12 +107,7 @@ const Employee = () => {
             cellRendererFramework: (params) => (
                 <div className="flex gap-4">
                     <UpdateEmployee updateUserInfo={params?.data} />
-
-                    <MdOutlineDelete
-                        style={{ color: "#05A8F5", cursor: "pointer" }}
-                        fontSize={30}
-                        onClick={() => handleDelete(user._id)}
-                    />
+                    <DeleteModal id={params?.data?._id} />
                 </div>
             ),
         },

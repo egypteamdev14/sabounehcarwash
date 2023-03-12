@@ -10,6 +10,9 @@ import React, { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 import AgGridDT from "@/components/AgGridDT";
 import { MdOutlineDelete } from "react-icons/md";
+import { toast } from "react-toastify";
+import { Modal } from "react-bootstrap";
+import DeleteModal from "@/components/DeleteModal";
 
 const ServiceProvider = () => {
     const [gridApi, setGridApi] = useState(null);

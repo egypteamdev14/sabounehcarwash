@@ -4,7 +4,6 @@ import { deleteUser, fetchAllUsers } from "@/services/users";
 import { useSession } from "next-auth/react";
 import React, { useCallback, useState } from "react";
 import { useQuery } from "react-query";
-import AgGridDT from "@/components/AgGridDT";
 // // import { toast } from 'react-toastify'
 // import AddNewCustomer from '@/components/Users/Customer/AddNewCustomer'
 // import UpdateCustomer from '@/components/Users/Customer/UpdateCustomer'
@@ -15,6 +14,8 @@ import { MdOutlineDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import AddNewCustomer from "@/components/Users/Customer/AddNewCustomer";
 import UpdateCustomer from "@/components/Users/Customer/UpdateCustomer";
+import DeleteModal from "@/components/DeleteModal";
+import AgGridDT from "@/components/AgGridDT";
 
 const Customers = () => {
     const [gridApi, setGridApi] = useState(null);
