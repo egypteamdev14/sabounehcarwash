@@ -11,7 +11,7 @@ const Location = () => {
                 <input
                     type="radio"
                     id="Home Location"
-                    name="Home Location"
+                    name="Location"
                     value="Home Location"
                     checked
                 />
@@ -22,7 +22,7 @@ const Location = () => {
                 <input
                     type="radio"
                     id="Office Location"
-                    name="Office Location"
+                    name="Location"
                     value="Office Location"
                 />
                 <label htmlFor="Office Location">Office Location</label>

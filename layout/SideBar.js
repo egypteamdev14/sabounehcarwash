@@ -28,7 +28,7 @@ const SideBar = ({ sidebar, setToggle, toggle }) => {
                     className="block md:hidden absolute top-4 right-4 cursor-pointer"
                     onClick={() => setToggle((prev) => !prev)}
                 >
-                    <AiOutlineClose />
+                    <AiOutlineClose color="#000" />
                 </div>
                 <div className="menu-items">
                     <ul>

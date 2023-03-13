@@ -1,0 +1,22 @@
+.create-order {
+	background-color: #fff;
+	margin: 50px 100px;
+	height: 70vh;
+
+
+	div {
+		display: flex;
+		flex-direction: column;
+
+		ul {
+			margin-top: -50px;
+			margin-bottom: 50px;
+		}
+
+		:last-child {
+			display: flex;
+		}
+
+
+	}
+}

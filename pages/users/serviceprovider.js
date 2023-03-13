@@ -64,7 +64,7 @@ const ServiceProvider = () => {
                         <MdOutlineDelete
                             style={{ color: "#05A8F5", cursor: "pointer" }}
                             fontSize={30}
-                            onClick={() => handleDelete(user._id)}
+                            onClick={() => handleDelete(params?.data._id)}
                         />
                     </div>
                 ),
@@ -78,6 +78,7 @@ const ServiceProvider = () => {
         flex: 1,
         filter: true,
         floatingFilter: true,
+        suppressHorizontalScroll: true,
     };
 
     //  init

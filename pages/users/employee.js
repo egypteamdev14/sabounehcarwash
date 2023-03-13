@@ -119,6 +119,7 @@ const Employee = () => {
         flex: 1,
         filter: true,
         floatingFilter: true,
+        suppressHorizontalScroll: true,
     };
     //  init
     const onGridReady = (params) => {

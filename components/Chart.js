@@ -28,31 +28,13 @@ const Chart = () => {
             pv: 3908,
             amt: 2000,
         },
-        {
-            name: "Page E",
-            uv: 1890,
-            pv: 4800,
-            amt: 2181,
-        },
-        {
-            name: "Page F",
-            uv: 2390,
-            pv: 3800,
-            amt: 2500,
-        },
-        {
-            name: "Page G",
-            uv: 3490,
-            pv: 4300,
-            amt: 2100,
-        },
     ];
     return (
         <AreaChart
             width={790}
             height={250}
             data={data}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            margin={{ top: 10, right: 100, left: 10, bottom: 10 }}
         >
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

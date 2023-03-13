@@ -1,5 +1,7 @@
 import BasicInformation from "@/components/CreateOrder/BasicInformation";
+import DateOfOrder from "@/components/CreateOrder/DateOfOrder";
 import Location from "@/components/CreateOrder/Location";
+import PaymentMethod from "@/components/CreateOrder/PaymentMethod";
 import React from "react";
 import StepProgressBar from "react-step-progress";
 // import the stylesheet
@@ -11,27 +13,34 @@ const CreateOrder = () => {
     return (
         <div className="create-order">
             <StepProgressBar
-                startingStep={1}
+                startingStep={0}
                 // onSubmit={onFormSubmit}
                 steps={[
                     {
-                        label: "Basic Information",
-                        subtitle: "10%",
-                        name: "Basic Information",
+                        label: "Information",
+                        subtitle: "25%",
+                        name: "Information",
                         content: <BasicInformation />,
                     },
                     {
-                        label: "Step 2",
+                        label: "Location",
                         subtitle: "50%",
-                        name: "step 2",
+                        name: "Location",
                         content: <Location />,
                         // validator: step2Validator,
                     },
                     {
-                        label: "Step 3",
-                        subtitle: "100%",
-                        name: "step 3",
-                        content: BasicInformation,
+                        label: "Date",
+                        subtitle: "75%",
+                        name: "Date",
+                        content: <DateOfOrder />,
+                        // validator: step3Validator,
+                    },
+                    {
+                        label: "PaymentMethod",
+                        subtitle: "75%",
+                        name: "PaymentMethod",
+                        content: <PaymentMethod />,
                         // validator: step3Validator,
                     },
                 ]}
