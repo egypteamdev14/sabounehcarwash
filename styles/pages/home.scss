@@ -10,6 +10,10 @@
         // justify-content: space-evenly;
         gap: 40px;
 
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+
         // height: 200px;       
         .analytic-card {
             width: 320px;
@@ -77,5 +81,23 @@
         align-items: center;
         justify-content: center;
         gap: 40px;
+
+        @media screen and (max-width:767px) {
+            flex-direction: column;
+        }
+    }
+
+    .table-comp {
+        width: 70%;
+
+        @media screen and (max-width:767px) {
+            width: 100%;
+        }
+    }
+
+    .recharts-wrapper {
+        @media screen and (max-width:767px) {
+            width: 450px !important;
+        }
     }
 }

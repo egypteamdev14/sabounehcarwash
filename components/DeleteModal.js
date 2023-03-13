@@ -5,10 +5,10 @@ import { MdDeleteOutline } from "react-icons/md";
 import { toast } from "react-toastify";
 import Button from "./Button";
 const DeleteModal = ({ id }) => {
-  const [show, setShow] = useState(false);
-  const handleDelete = async () => {
-    try {
-      await deleteUser(id);
+    const [show, setShow] = useState(false);
+    const handleDelete = async () => {
+        try {
+            await deleteUser(id);
 
       toast.success("User deleted successful");
       setShow(false);

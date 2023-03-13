@@ -15,22 +15,10 @@ const Orders = () => {
       });
 
     console.log(data);
-    //  useEffect(()=> {
-    // 	const getData = async ()=> {
-    // 	 const res =  await getAllOrders();
-
-    // 	 setOrderData(res)
-
-    // 	}
-
-    // 	getData()
-    //  },[])
-
-    //  console.log(orderData);
 
     // columns definition
     const columnDefs = [
-        { headerName: "ID", field: "_id", maxWidth: 100 },
+        { headerName: "ID", field: "orderId", maxWidth: 100 },
         { headerName: "Created date", field: "createdAt", maxWidth: 150 },
         // { headerName: "Start Wash date", field: "phoneNumber", maxWidth: 150 },
 
@@ -78,6 +66,7 @@ const Orders = () => {
         flex: 1,
         filter: true,
         floatingFilter: true,
+        alwaysShowHorizontalScroll: true,
     };
 
     //  init
@@ -104,20 +93,6 @@ const Orders = () => {
             };
         }
     };
-
-    // delete
-    // const handleDelete = async (id) => {
-    // 	try {
-    // 		await deleteUser(id);
-
-    // 		const filterData = users?.filter((user) => user._id !== id);
-    // 		// setUsers(filterData);
-    // 		toast.success("User deleted successful")
-    // 	} catch (error) {
-    // 		console.log(error.message);
-    // 		toast.error(error.message);
-    // 	}
-    // }
 
     return (
         <section className="orders">
@@ -149,50 +124,3 @@ const Orders = () => {
     );
 };
 export default Orders;
-{
-    /* <Table striped bordered hover>
-				<thead>
-					<tr>
-						<th>#ID</th>
-						<th>Full Name</th>
-						<th>Phone Number</th>
-						<th style={{ width: "20%" }}>Creation of account date</th>
-						<th >last login date</th>
-						<th >employee state</th>
-						<th >Privilege</th>
-						<th>Delete</th>
-						<th>Update</th>
-					</tr>
-				</thead>
-				<tbody>
-					{isLoading && <tr className='fs-3 p-4'>Loading</tr>}
-					{employee?.map((user) => (
-
-						<tr key={user._id}>
-							<td>{user._id.slice(0, 8)}</td>
-							<td>{user.fullName}</td>
-							<td>{user.phoneNumber}</td>
-							<td >{user.createdAt}</td>
-							<td >{user.lastLogin}</td>
-							<td >{user.status}</td>
-							<td >{user.permissions}</td>
-							
-							<td>
-								<Button
-									bg={"#05A8F5"}
-									color={"#ffffff"}
-									width={"130px"}
-									height={"35px"}
-									radius={"8px"}
-									fontSize={"1rem"}
-									onClick={() => handleDelete(user._id)}
-								>Delete</Button> </td>
-							<td>
-								<UpdateUserPopUp id={user._id} />
-							</td>
-						</tr>
-					))}
-
-				</tbody>
-			</Table> */
-}

@@ -1,18 +1,19 @@
 import Head from "next/head";
+import dynamic from "next/dynamic";
 // import Image from 'next/image'
 import { Inter } from "@next/font/google";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { mainPageCard } from "@/helper/mainPageCard";
-import { MdOutlineMoreHoriz } from "react-icons/md";
+// import { MdOutlineMoreHoriz } from "react-icons/md";
 import AnalyticCard from "@/components/MainPage/AnalyticCard";
 import Chart from "@/components/Chart";
-import TableOrder from "@/components/OrderTable";
+
 import { getAllOrders } from "@/services/orders";
 import { useQuery } from "react-query";
-// import PiaChart from "@/components/MainPage/PiaChart";
+
 const inter = Inter({ subsets: ["latin"] });
 
-import dynamic from "next/dynamic";
+import OrderTable from "@/components/OrderTable";
 
 const PiaChart = dynamic(() => import("../components/MainPage/PiaChart"), {
     ssr: false,
@@ -42,16 +43,8 @@ export default function Home() {
                     <Chart />
                     <PiaChart />
                 </div>
-                <TableOrder data={data?.orders} />
+                <OrderTable data={data?.orders} />
             </main>
         </>
     );
-}
-
-export async function getStaticProps({ locale = "en-EN" }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ["common", "home"])),
-        },
-    };
 }

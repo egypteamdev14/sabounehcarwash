@@ -77,21 +77,22 @@ const Coupons = () => {
     gridApi?.api.exportDataAsCsv();
     // gridApi?.api.exportDataAsExcel();
   };
+    // Row Style
+    const getRowStyle = (params) => {
+        if (params.data._id % 2) {
+            return {
+                backgroundColor: "#fff",
+                color: "#7A0C2E",
+            };
+        } else {
+            return {
+                backgroundColor: "#fff",
+                color: "#001C29",
+            };
+        }
+    };
 
-  // Row Style
-  const getRowStyle = (params) => {
-    if (params.data._id % 2) {
-      return {
-        backgroundColor: "#FFE7D9",
-        color: "#7A0C2E",
-      };
-    } else {
-      return {
-        backgroundColor: "#e0e0e0",
-        color: "#001C29",
-      };
-    }
-  };
+
 
   // delete Coupon
   const handleDelete = async (id) => {

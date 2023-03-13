@@ -1,9 +1,8 @@
 import Table from "react-bootstrap/Table";
 
-function StripedRowExample({ data }) {
-    console.log(data);
+function OrderTable({ data }) {
     return (
-        <Table className="mt-5" striped style={{ width: "65%" }}>
+        <Table className="table-comp mt-5" striped>
             <thead>
                 <tr>
                     <th>Order Id</th>
@@ -39,4 +38,4 @@ function StripedRowExample({ data }) {
     );
 }
 
-export default StripedRowExample;
+export default OrderTable;
