@@ -7,113 +7,148 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 const Orders = () => {
-  const [gridApi, setGridApi] = useState(null);
-  //  const [orderData, setOrderData]= useState([]);
+    const [gridApi, setGridApi] = useState(null);
+    //  const [orderData, setOrderData]= useState([]);
 
-  const { data, error, isLoading } = useQuery("getOrders", getAllOrders);
+    const { data, error, isLoading } = useQuery("getOrders", getAllOrders);
 
-  //  useEffect(()=> {
-  // 	const getData = async ()=> {
-  // 	 const res =  await getAllOrders();
+    console.log(data);
+    //  useEffect(()=> {
+    // 	const getData = async ()=> {
+    // 	 const res =  await getAllOrders();
 
-  // 	 setOrderData(res)
+    // 	 setOrderData(res)
 
-  // 	}
+    // 	}
 
-  // 	getData()
-  //  },[])
+    // 	getData()
+    //  },[])
 
-  //  console.log(orderData);
+    //  console.log(orderData);
 
-  // columns definition
-  const columnDefs = [
-    { headerName: "ID", field: "_id", maxWidth: 100 },
-    { headerName: "Created date", field: "createdAt", maxWidth: 150 },
-    // { headerName: "Start Wash date", field: "phoneNumber", maxWidth: 150 },
+    // columns definition
+    const columnDefs = [
+        { headerName: "ID", field: "_id", maxWidth: 100 },
+        { headerName: "Created date", field: "createdAt", maxWidth: 150 },
+        // { headerName: "Start Wash date", field: "phoneNumber", maxWidth: 150 },
 
-    { headerName: "Order State", field: "status", maxWidth: 300 },
-    { headerName: "Customer Name", field: "user.fullName" },
-    { headerName: "Washer Name", field: "sysProvider.fullName", maxWidth: 170 },
-    { headerName: "Service type ", field: "washType" },
-    { headerName: "Vehicle type ", field: "vehicleId.title" },
-    { headerName: "Payment Method ", field: "paymentMethod" },
-  ];
-  const defaultColDef = {
-    sortable: true,
-    flex: 1,
-    filter: true,
-    floatingFilter: true,
-  };
+        { headerName: "Order State", field: "status", maxWidth: 300 },
+        {
+            headerName: "Customer Name",
+            field: "user.fullName",
 
-  //  init
-  const onGridReady = (params) => {
-    setGridApi(params);
-  };
+            valueGetter: (params) =>
+                params.data?.user?.fullName ? (
+                    params.data?.user?.fullName
+                ) : (
+                    <p className="text-danger">Not Assigned Yet</p>
+                ),
+        },
+        {
+            headerName: "Washer Name",
+            field: "sysProvider.fullName",
+            maxWidth: 170,
+            valueGetter: (params) =>
+                params.data?.sysProvider?.fullName
+                    ? params.data?.sysProvider?.fullName
+                    : "Not Assigned Yet",
+        },
+        {
+            headerName: "Service type ",
+            field: "subscriptionId.title",
+            valueGetter: (params) =>
+                params.data.subscriptionId?.title
+                    ? params.data.subscriptionId?.title
+                    : "Not Assigned",
+        },
+        {
+            headerName: "Vehicle type ",
+            field: "vehicleId.title",
+            valueGetter: (params) =>
+                params.data?.vehicleId?.title
+                    ? params.data?.vehicleId?.title
+                    : "Not Assigned",
+        },
+        { headerName: "Payment Method ", field: "paymentMethod" },
+    ];
+    const defaultColDef = {
+        sortable: true,
+        flex: 1,
+        filter: true,
+        floatingFilter: true,
+    };
 
-  // Export Excel
-  const onBtExport = () => {
-    gridApi?.api.exportDataAsCsv();
-  };
+    //  init
+    const onGridReady = (params) => {
+        setGridApi(params);
+    };
 
-  // Row Style
-  const getRowStyle = (params) => {
-    if (params.data._id % 2) {
-      return {
-        backgroundColor: "#fff",
-        color: "#7A0C2E",
-      };
-    } else {
-      return {
-        backgroundColor: "#fff",
-        color: "#001C29",
-      };
-    }
-  };
+    // Export Excel
+    const onBtExport = () => {
+        gridApi?.api.exportDataAsCsv();
+    };
 
-  // delete
-  // const handleDelete = async (id) => {
-  // 	try {
-  // 		await deleteUser(id);
+    // Row Style
+    const getRowStyle = (params) => {
+        if (params.data._id % 2) {
+            return {
+                backgroundColor: "#fff",
+                color: "#7A0C2E",
+            };
+        } else {
+            return {
+                backgroundColor: "#fff",
+                color: "#001C29",
+            };
+        }
+    };
 
-  // 		const filterData = users?.filter((user) => user._id !== id);
-  // 		// setUsers(filterData);
-  // 		toast.success("User deleted successful")
-  // 	} catch (error) {
-  // 		console.log(error.message);
-  // 		toast.error(error.message);
-  // 	}
-  // }
+    // delete
+    // const handleDelete = async (id) => {
+    // 	try {
+    // 		await deleteUser(id);
 
-  return (
-    <section className="orders">
-      <div className="d-flex justify-content-between align-items-center m-3">
-        <h2> Order list </h2>
-      </div>
-      <Button
-        onClick={onBtExport}
-        bg={"#05A8F5"}
-        color={"#ffffff"}
-        width={"130px"}
-        height={"35px"}
-        radius={"8px"}
-        fontSize={"1rem"}
-        cl={"mt-2 mb-3"}
-      >
-        Export to Excel
-      </Button>
-      <AgGridDT
-        columnDefs={columnDefs}
-        rowData={data?.orders}
-        defaultColDef={defaultColDef}
-        onGridReady={onGridReady}
-        getRowStyle={getRowStyle}
-      />
-    </section>
-  );
+    // 		const filterData = users?.filter((user) => user._id !== id);
+    // 		// setUsers(filterData);
+    // 		toast.success("User deleted successful")
+    // 	} catch (error) {
+    // 		console.log(error.message);
+    // 		toast.error(error.message);
+    // 	}
+    // }
+
+    return (
+        <section className="orders">
+            <div className="d-flex justify-content-between align-items-center m-3">
+                <h2> Order list </h2>
+            </div>
+
+            <Button
+                onClick={onBtExport}
+                bg={"#05A8F5"}
+                color={"#ffffff"}
+                width={"130px"}
+                height={"35px"}
+                radius={"8px"}
+                fontSize={"1rem"}
+                cl={"mt-2 mb-3"}
+            >
+                Export to Excel
+            </Button>
+
+            <AgGridDT
+                columnDefs={columnDefs}
+                rowData={data?.orders}
+                defaultColDef={defaultColDef}
+                onGridReady={onGridReady}
+                getRowStyle={getRowStyle}
+            />
+        </section>
+    );
 };
 export default Orders;
 {
-  /* <Table striped bordered hover>
+    /* <Table striped bordered hover>
 				<thead>
 					<tr>
 						<th>#ID</th>
