@@ -34,100 +34,104 @@ const Employee = () => {
   };
 
   // columns definition
-  const columnDefs = [
-    {
-      headerName: "ID",
-      field: "_id",
-      maxWidth: 150,
-      filterParams: {
-        filterOptions: ["startsWith", "contains"],
-        defaultOption: "startsWith",
+  const gridOptions = {
+    columnDefs: [
+      {
+        headerName: "ID",
+        field: "_id",
+        maxWidth: 150,
+        filterParams: {
+          filterOptions: ["startsWith", "contains"],
+          defaultOption: "startsWith",
+        },
       },
-    },
-    {
-      headerName: "Full Name",
-      field: "fullName",
-      maxWidth: 150,
-      filterParams: {
-        filterOptions: ["startsWith", "contains"],
-        defaultOption: "startsWith",
+      {
+        headerName: "Full Name",
+        field: "fullName",
+        maxWidth: 150,
+        filterParams: {
+          filterOptions: ["startsWith", "contains"],
+          defaultOption: "startsWith",
+        },
       },
-    },
-    {
-      headerName: "Phone Number",
-      field: "phoneNumber",
-      maxWidth: 150,
-      filterParams: {
-        filterOptions: ["startsWith", "contains"],
-        defaultOption: "startsWith",
+      {
+        headerName: "Phone Number",
+        field: "phoneNumber",
+        maxWidth: 150,
+        filterParams: {
+          filterOptions: ["startsWith", "contains"],
+          defaultOption: "startsWith",
+        },
       },
-    },
 
-    {
-      headerName: "Creation of account date",
-      field: "createdAt",
-      maxWidth: 300,
-      filterParams: {
-        filterOptions: ["startsWith", "contains"],
-        defaultOption: "startsWith",
+      {
+        headerName: "Creation of account date",
+        field: "createdAt",
+        maxWidth: 300,
+        filterParams: {
+          filterOptions: ["startsWith", "contains"],
+          defaultOption: "startsWith",
+        },
       },
-    },
-    {
-      headerName: "Last login date",
-      field: "lastLogin",
-      filterParams: {
-        filterOptions: ["startsWith", "contains"],
-        defaultOption: "startsWith",
+      {
+        headerName: "Last login date",
+        field: "lastLogin",
+        filterParams: {
+          filterOptions: ["startsWith", "contains"],
+          defaultOption: "startsWith",
+        },
       },
-    },
-    {
-      headerName: "Employee state",
-      field: "status",
-      maxWidth: 170,
-      filterParams: {
-        filterOptions: ["startsWith", "contains"],
-        defaultOption: "startsWith",
+      {
+        headerName: "Employee state",
+        field: "status",
+        maxWidth: 170,
+        filterParams: {
+          filterOptions: ["startsWith", "contains"],
+          defaultOption: "startsWith",
+        },
       },
-    },
-    {
-      headerName: "Privilege",
-      field: "permissions",
-      filterParams: {
-        filterOptions: ["startsWith", "contains"],
-        defaultOption: "startsWith",
+      {
+        headerName: "Privilege",
+        field: "permissions",
+        filterParams: {
+          filterOptions: ["startsWith", "contains"],
+          defaultOption: "startsWith",
+        },
       },
-    },
-    {
-      headerName: "Actions",
-      field: "id",
-      minWidth: 400,
-      sortable: false,
-      filter: false,
-      floatingFilter: false,
-      cellRendererFramework: (params) => (
-        <div className="flex gap-4">
-          <UpdateEmployee updateUserInfo={params?.data} />
-          <DeleteModal id={params?.data?._id} />
-        </div>
-      ),
-    },
-  ];
-
-  //  default Column Definition
-  const defaultColDef = {
-    sortable: true,
-    flex: 1,
-    filter: true,
-    floatingFilter: true,
+      {
+        headerName: "Actions",
+        field: "id",
+        minWidth: 400,
+        sortable: false,
+        filter: false,
+        floatingFilter: false,
+        cellRendererFramework: (params) => (
+          <div className="flex gap-4">
+            <UpdateEmployee updateUserInfo={params?.data} />
+            <DeleteModal id={params?.data?._id} />
+          </div>
+        ),
+      },
+    ],
   };
+  const onBtnExport = useCallback(() => {
+    gridOptions.columnDefs?.api?.exportDataAsExcel();
+  }, []);
+  //  default Column Definition
+  const defaultColDef = useMemo(() => {
+    return {
+      sortable: true,
+      filter: true,
+      resizable: true,
+      minWidth: 100,
+      flex: 1,
+    };
+  }, []);
   //  init
   const onGridReady = (params) => {
     setGridApi(params);
   };
   // Export Excel
-  const onBtExport = useCallback(() => {
-    gridApi?.api.exportDataAsCsv();
-  }, [gridApi?.api]);
 
   // Row Style
   const getRowStyle = (params) => {
@@ -152,7 +156,7 @@ const Employee = () => {
       </div>
 
       <Button
-        onClick={onBtExport}
+        onClick={onBtnExport}
         bg={"#05A8F5"}
         color={"#ffffff"}
         width={"130px"}
@@ -165,11 +169,13 @@ const Employee = () => {
       </Button>
 
       <AgGridDT
-        columnDefs={columnDefs}
+        columnDefs={gridOptions.columnDefs}
         rowData={employee}
         defaultColDef={defaultColDef}
         onGridReady={onGridReady}
         getRowStyle={getRowStyle}
+        allowContextMenuWithControlKey={true}
+        enableRangeSelection={true}
       />
     </section>
   );
