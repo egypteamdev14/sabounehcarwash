@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from '../../Button';
 import { updateUser } from '@/services/users';
 import { toast } from 'react-toastify';
+import { MdModeEditOutline } from "react-icons/md";
 
 function UpdateEmployee({ updateUserInfo }) {
   const [show, setShow] = useState(false);
@@ -46,15 +47,11 @@ function UpdateEmployee({ updateUserInfo }) {
   return (
     <>
       <Button
-        bg={"#05A8F5"}
-        color={"#ffffff"}
-        width={"170px"}
-        height={"35px"}
-        radius={"8px"}
-        fontSize={"1rem"}
+        color={"#05A8F5"}
+        fontSize={"1.5rem"}
         onClick={handleShow}
       >
-        Update Employee{" "}
+        <MdModeEditOutline/>
       </Button>
 
       <Modal centered show={show} onHide={handleClose}>

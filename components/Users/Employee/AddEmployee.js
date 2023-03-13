@@ -35,7 +35,6 @@ function AddEmployee({ updateUserInfo }) {
     e.preventDefault();
     try {
       await addUser(formData);
-
       toast.success("User added successfully");
       setShow(false);
     } catch (error) {

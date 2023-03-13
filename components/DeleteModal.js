@@ -36,19 +36,23 @@ const DeleteModal = ({ id }) => {
         <Modal.Body>Are You Sure You want To Delete?</Modal.Body>
         <Modal.Footer>
           <Button
-            color={"black"}
+            bg={"#05A8F5"}
+            color={"#fff"}
             height={"35px"}
-            radius={"8px"}
+            width={"80px"}
+            radius={"4px"}
             fontSize={"1.5rem"}
-            style={{marginRight:"20px"}}
+            style={{ marginRight: "20px" }}
             onClick={() => setShow(false)}
           >
             No
           </Button>
           <Button
-            color={"black"}
+            bg={"#05A8F5"}
+            color={"#fff"}
             height={"35px"}
-            radius={"8px"}
+            width={"80px"}
+            radius={"4px"}
             fontSize={"1.5rem"}
             onClick={() => {
               handleDelete(id);

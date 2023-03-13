@@ -10,7 +10,9 @@ const Orders = () => {
     const [gridApi, setGridApi] = useState(null);
     //  const [orderData, setOrderData]= useState([]);
 
-    const { data, error, isLoading } = useQuery("getOrders", getAllOrders);
+    const { data, error, isLoading } = useQuery("getOrders", getAllOrders,{
+        refetchInterval: 3000,
+      });
 
     console.log(data);
     //  useEffect(()=> {
